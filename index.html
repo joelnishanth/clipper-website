@@ -1,0 +1,504 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://use.typekit.net" crossorigin />
+    <link rel="icon" type="image/png" href="assets/clipper-logo.png" />
+    <link rel="stylesheet" href="fonts.css" />
+    <link rel="stylesheet" href="styles.css" />
+    <title>Clipper — The offline AI notepad for meetings</title>
+    <meta
+      name="description"
+      content="Clipper takes your raw meeting notes and makes them awesome — with local transcription and on-device AI. No cloud. No meeting bots. Mac only."
+    />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a href="#" class="logo">
+          <img src="assets/clipper-logo.png" alt="Clipper" width="40" height="40" />
+          <span class="logo-text">
+            <span class="logo-name">Clipper</span>
+            <span class="logo-byline">by Offlyn.ai</span>
+          </span>
+        </a>
+        <nav class="nav-desktop">
+          <a href="#how-it-works">How it works</a>
+          <a href="#features">Features</a>
+          <a href="#privacy">Privacy</a>
+          <a href="#download" class="nav-cta">Download for Mac</a>
+        </nav>
+        <button class="menu-toggle" aria-label="Open menu" type="button">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+      <nav class="nav-mobile container">
+        <a href="#how-it-works">How it works</a>
+        <a href="#features">Features</a>
+        <a href="#privacy">Privacy</a>
+        <a href="#download">Download for Mac</a>
+      </nav>
+    </header>
+
+    <main>
+      <!-- Hero -->
+      <section class="hero-wrap">
+        <div class="container hero-grid hero">
+          <div>
+            <p class="eyebrow">Offline · Local · Mac-native</p>
+            <h1>The offline AI notepad for people in back-to-back meetings</h1>
+            <p class="hero-lead">
+              Clipper takes your raw meeting notes and makes them awesome — with transcription
+              and AI that never leaves your Mac.
+            </p>
+            <div class="hero-actions">
+              <a href="#download" class="btn btn-primary">Download for Mac</a>
+              <a href="#how-it-works" class="btn btn-secondary">See how it works</a>
+            </div>
+          </div>
+          <div class="hero-visual">
+            <img
+              src="assets/hero-mock.svg"
+              alt="Clipper meeting notes interface"
+              width="1280"
+              height="720"
+            />
+          </div>
+        </div>
+      </section>
+
+      <!-- Raw → Enhanced demo (animated) -->
+      <section class="section section-demo">
+        <div class="container">
+          <div class="section-header center">
+            <h2 class="section-title">Your notes + local transcript</h2>
+            <p class="section-subtitle">
+              Jot down what matters during the call. Clipper captures audio on your Mac and
+              enhances what you wrote when the meeting ends — no cloud processing.
+            </p>
+          </div>
+          <div class="demo-stage" id="notes-demo">
+            <div class="demo-glow" aria-hidden="true"></div>
+            <div class="demo-row">
+              <div class="demo-window demo-transcript" id="transcript-panel">
+                <div class="transcript-header">
+                  <span class="transcript-dot" aria-hidden="true"></span>
+                  <span class="transcript-label">Live transcript</span>
+                  <span class="transcript-badge">On-device</span>
+                </div>
+                <div class="transcript-messages" id="transcript-messages"></div>
+              </div>
+              <div class="demo-window demo-notes">
+                <div class="demo-window-bar">
+                  <span class="demo-dot demo-dot-red"></span>
+                  <span class="demo-dot demo-dot-yellow"></span>
+                  <span class="demo-dot demo-dot-green"></span>
+                  <span class="demo-window-title">Clipper — Notes</span>
+                </div>
+                <div class="demo-window-body demo-notes-body">
+                  <div class="notes-header">
+                    <div>
+                      <p class="notes-title">Intro call: AllFound</p>
+                      <p class="notes-meta">Today, 2:00 PM · Jim Swenson, Sarah Chen +3</p>
+                    </div>
+                    <span class="notes-phase-badge" id="notes-phase-badge">Your notes</span>
+                  </div>
+                  <div class="notes-stack">
+                    <div class="notes-layer notes-typing">
+                      <p class="typing-line">100 employees, hiring ~20 in Q2</p>
+                      <p class="typing-line">2 eng, 1 design — SF hq + austin office</p>
+                      <p class="typing-line">current stack: tuesday.ai — v manual data entry</p>
+                      <p class="typing-line">finance team refuses to use it, too complex</p>
+                      <p class="typing-line">$180 / employee / year (!)</p>
+                      <p class="typing-line">jim: "finding a better tool is top Q2 priority"</p>
+                      <p class="typing-line">need HIPAA-grade doc sharing w/ clients</p>
+                      <p class="typing-line">sarah — worried HR won't adopt, non-technical team</p>
+                      <p class="typing-line">asked about onboarding + SSO</p>
+                      <p class="typing-line">demo w/ broader team next tuesday?</p>
+                    </div>
+                    <div class="notes-layer notes-enhanced-layer enhanced-container">
+                      <div class="notes-section enhanced-section">
+                        <h4 class="enhanced-line">AllFound Overview</h4>
+                        <ul>
+                          <li class="enhanced-line">
+                            <span class="gradient-text">100 employees today, planning ~20 hires in Q2</span>
+                          </li>
+                          <li class="enhanced-line">
+                            <span class="gradient-text-grey">HQ in San Francisco with a growing Austin satellite office</span>
+                          </li>
+                          <li class="enhanced-line">
+                            <span class="gradient-text">Engineering team of 2, design team of 1</span>
+                          </li>
+                        </ul>
+                      </div>
+                      <div class="notes-section enhanced-section">
+                        <h4 class="enhanced-line">Current Provider — Tuesday.ai</h4>
+                        <ul>
+                          <li class="enhanced-line">
+                            <span class="gradient-text">Data input is too manual — biggest pain point across teams</span>
+                          </li>
+                          <li class="enhanced-line">
+                            <span class="gradient-text-grey">Finance refuses to use it; workflow feels over-engineered</span>
+                          </li>
+                          <li class="enhanced-line">
+                            <span class="gradient-text">Non-technical HR staff struggle with adoption (Sarah's concern)</span>
+                          </li>
+                          <li class="enhanced-line">
+                            <span class="gradient-text-grey">Current spend: $180 per employee per year</span>
+                          </li>
+                        </ul>
+                      </div>
+                      <div class="notes-section enhanced-section">
+                        <h4 class="enhanced-line">Requirements &amp; Timeline</h4>
+                        <ul>
+                          <li class="enhanced-line">
+                            <span class="gradient-text">Replacing Tuesday.ai is a top Q2 priority for leadership</span>
+                          </li>
+                          <li class="enhanced-line">
+                            <span class="gradient-text-grey">Must support HIPAA-grade secure document sharing with clients</span>
+                          </li>
+                          <li class="enhanced-line">
+                            <span class="gradient-text">SSO and smooth onboarding for non-technical teams required</span>
+                          </li>
+                        </ul>
+                      </div>
+                      <div class="notes-section enhanced-section">
+                        <h4 class="enhanced-line">Decision Process</h4>
+                        <ul>
+                          <li class="enhanced-line">
+                            <span class="gradient-text-grey">Jim (VP Ops) owns vendor evaluation</span>
+                          </li>
+                          <li class="enhanced-line">
+                            <span class="gradient-text-grey">Sarah (Head of People) needs HR team buy-in before rollout</span>
+                          </li>
+                          <li class="enhanced-line">
+                            <span class="gradient-text">Finance sign-off required on any contract over $15K/yr</span>
+                          </li>
+                        </ul>
+                      </div>
+                      <div class="notes-section enhanced-section">
+                        <h4 class="enhanced-line">Next Steps</h4>
+                        <ul>
+                          <li class="enhanced-line">
+                            <span class="gradient-text">Send product overview + security whitepaper by EOD</span>
+                          </li>
+                          <li class="enhanced-line">
+                            <span class="gradient-text-grey">Schedule demo with broader team — target next Tuesday</span>
+                          </li>
+                          <li class="enhanced-line">
+                            <span class="gradient-text">Follow up on SSO support and HIPAA compliance docs</span>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- How it works -->
+      <section class="section section-about" id="how-it-works">
+        <div class="container">
+          <div class="section-header center">
+            <p class="section-label">How it works</p>
+            <h2 class="section-title">Like Apple Notes, but it also transcribes your meeting — locally</h2>
+          </div>
+          <div class="steps-grid">
+            <article class="step-card">
+              <span class="step-num">1</span>
+              <h3>Take notes during the call</h3>
+              <p>
+                Write bare notes the way you already do. Clipper runs quietly on your Mac —
+                no bot joins the meeting.
+              </p>
+            </article>
+            <article class="step-card">
+              <span class="step-num">2</span>
+              <h3>Transcribe from your Mac's audio</h3>
+              <p>
+                Clipper captures your computer's audio directly and builds a local transcript
+                with speaker labels and timestamps.
+              </p>
+            </article>
+            <article class="step-card">
+              <span class="step-num">3</span>
+              <h3>Enhance when the meeting ends</h3>
+              <p>
+                On-device AI merges your notes with the transcript into structured, searchable
+                meeting notes — stored only on your machine.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- No bots -->
+      <section class="section section-dark section-no-bots">
+        <div class="container no-bots-grid">
+          <div>
+            <p class="section-label" style="color: var(--brand-light)">No meeting bots</p>
+            <h2 class="section-title">Works on Zoom, Meet, and Teams — without joining your call</h2>
+            <p class="section-subtitle" style="color: var(--zinc-300); max-width: none">
+              Clipper transcribes your Mac's audio directly. Nothing enters the meeting as a
+              participant. Detection is local; recording starts only when you tap Start.
+            </p>
+          </div>
+          <div class="stat-panel stat-panel-dark">
+            <div class="stat-card">
+              <div class="stat-value">0</div>
+              <div class="stat-label">Bots in your meetings</div>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat-card">
+              <div class="stat-value">100%</div>
+              <div class="stat-label">Audio processed on Mac</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Meeting templates demo -->
+      <section class="section section-templates" id="templates-demo">
+        <div class="container template-demo-grid">
+          <div class="template-demo-copy">
+            <h2 class="section-title">Get notes in the format your team needs</h2>
+            <p class="section-subtitle">
+              Customizable templates for customer discovery, user interviews, 1 on 1s, and more —
+              all generated locally on your Mac.
+            </p>
+            <div class="template-tabs" role="tablist" aria-label="Meeting note templates"></div>
+          </div>
+          <div class="template-preview-wrap">
+            <div class="demo-window template-window">
+              <div class="demo-window-bar">
+                <span class="demo-dot demo-dot-red"></span>
+                <span class="demo-dot demo-dot-yellow"></span>
+                <span class="demo-dot demo-dot-green"></span>
+              </div>
+              <div class="demo-window-body template-window-body">
+                <p class="notes-title template-meeting-title"></p>
+                <p class="notes-meta template-meeting-meta"></p>
+                <div class="template-sections" id="template-sections"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Features -->
+      <section class="section section-features" id="features">
+        <div class="container">
+          <div class="section-header center">
+            <p class="section-label">Features</p>
+            <h2 class="section-title">Everything you need for better meetings</h2>
+            <p class="section-subtitle">
+              Live transcription, meeting detection, hybrid search, and on-device AI —
+              all running locally on your Mac.
+            </p>
+          </div>
+          <div class="feature-grid">
+            <article class="feature-card">
+              <h4>Meeting templates</h4>
+              <p>Structured sections for takeaways, budget, next steps, and decision criteria.</p>
+            </article>
+            <article class="feature-card">
+              <h4>Live transcription</h4>
+              <p>Real-time speech-to-text with diarization, powered by on-device Whisper.</p>
+            </article>
+            <article class="feature-card">
+              <h4>Meeting detection</h4>
+              <p>Granola-style banner when Zoom, Meet, or Teams is detected — you choose to record.</p>
+            </article>
+            <article class="feature-card">
+              <h4>Hybrid search</h4>
+              <p>Find anything across meetings with keyword + semantic search, fully offline.</p>
+            </article>
+            <article class="feature-card">
+              <h4>Quick notes</h4>
+              <p>Capture thoughts between calls with inline local AI chat.</p>
+            </article>
+            <article class="feature-card">
+              <h4>Key moment clips</h4>
+              <p>Bookmark and revisit the moments that matter from any recording.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- AI actions: prompts + ask -->
+      <section class="section section-ai">
+        <div class="container section-ai-inner">
+          <div class="ai-prompts-block">
+            <div class="section-header center">
+              <p class="section-label">Local AI</p>
+              <h2 class="section-title">Put your meetings to work — on your Mac</h2>
+              <p class="section-subtitle">
+                Local AI models built into Clipper help you finish post-meeting action items
+                without sending data to the cloud.
+              </p>
+            </div>
+            <div class="prompt-grid">
+              <span class="prompt-chip">Write a follow-up email</span>
+              <span class="prompt-chip">List action items</span>
+              <span class="prompt-chip">What's their budget?</span>
+              <span class="prompt-chip">List their objections</span>
+              <span class="prompt-chip">What did they say?</span>
+              <span class="prompt-chip">Who was in the meeting?</span>
+              <span class="prompt-chip">Write a summary</span>
+              <span class="prompt-chip">What's next week's plan?</span>
+            </div>
+          </div>
+
+          <div class="ask-grid">
+            <div class="ask-copy">
+              <p class="section-label">Ask anything</p>
+              <h2 class="section-title ask-title">Ask Clipper anything</h2>
+              <p class="section-subtitle ask-subtitle">
+                Chat with your transcript to come back to a point that was made — pure gold for
+                user research, sales calls, and product reviews. Every answer runs locally.
+              </p>
+              <div class="ask-box">
+                <span class="ask-placeholder">What objections did they raise about pricing?</span>
+                <span class="ask-send" aria-hidden="true">↑</span>
+              </div>
+              <div class="ask-response">
+                <span class="ask-response-badge">On-device AI</span>
+                <p>
+                  Jim said $180/employee feels high compared to alternatives. Sarah noted finance
+                  won't approve without clearer ROI — they want cost projections before Q2 vendor
+                  selection.
+                </p>
+              </div>
+            </div>
+            <div class="demo-window ask-preview-window">
+              <div class="demo-window-bar">
+                <span class="demo-dot demo-dot-red"></span>
+                <span class="demo-dot demo-dot-yellow"></span>
+                <span class="demo-dot demo-dot-green"></span>
+                <span class="demo-window-title">Clipper — Notes</span>
+              </div>
+              <div class="demo-window-body ask-preview-body">
+                <p class="notes-title">Upstart Health intro call</p>
+                <p class="notes-meta">Today · Jim, Michaela +5</p>
+                <div class="notes-section">
+                  <h4>Key takeaways</h4>
+                  <ul class="ask-preview-list">
+                    <li>Budget: $50–75 per employee per year</li>
+                    <li>Looking to implement within Q2</li>
+                    <li>Must integrate with existing workflows</li>
+                    <li>Finance needs ROI projections before sign-off</li>
+                  </ul>
+                </div>
+                <div class="notes-section">
+                  <h4>Next steps</h4>
+                  <ul class="ask-preview-list">
+                    <li>Schedule demos with top 3 vendors</li>
+                    <li>Send security whitepaper to Jim by EOD</li>
+                    <li>Present findings to leadership team</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Privacy -->
+      <section class="section section-challenges" id="privacy">
+        <div class="container about-grid">
+          <div class="about-copy">
+            <p class="section-label">Privacy by design</p>
+            <h2 class="section-title">Your meetings never leave your Mac</h2>
+            <p class="section-subtitle">
+              Unlike cloud note-takers, Clipper has no servers processing your audio. No model
+              training on your data. No account required to transcribe. Export or share only
+              when you explicitly choose to.
+            </p>
+          </div>
+          <div class="stat-panel">
+            <div class="stat-card">
+              <div class="stat-value">100%</div>
+              <div class="stat-label">On-device AI</div>
+            </div>
+            <div class="stat-divider" aria-hidden="true"></div>
+            <div class="stat-card">
+              <div class="stat-value">0</div>
+              <div class="stat-label">Cloud uploads</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Social proof tone (adapted, not copied) -->
+      <section class="section">
+        <div class="container">
+          <div class="section-header center">
+            <h2 class="section-title">Built for people with back-to-back meetings</h2>
+            <p class="section-subtitle">
+              Minimal, fast, no setup. Write bare notes → local AI enhances them.
+              The ability to chat with your transcript without sending it anywhere.
+            </p>
+          </div>
+          <blockquote class="quote-block">
+            <p>
+              "Clipper solved meeting notes for me — and I never have to think about where
+              my data goes. It just works, entirely on my Mac."
+            </p>
+            <footer>— The offline-first alternative to cloud AI notetakers</footer>
+          </blockquote>
+        </div>
+      </section>
+
+      <!-- CTA -->
+      <section class="cta-band" id="download">
+        <div class="container">
+          <h2>Start taking better meeting notes — offline</h2>
+          <p>Free beta for macOS. Apple Silicon recommended. No subscription required.</p>
+          <a href="#" class="btn btn-primary">Download for Mac</a>
+          <p class="cta-fine">macOS 14+ · ~2 GB for models · No meeting bots · No cloud</p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-top">
+        <div class="container footer-top-inner">
+          <a href="#" class="logo logo-footer">
+            <img src="assets/clipper-logo.png" alt="Clipper" width="40" height="40" />
+            <span class="logo-text">
+              <span class="logo-name">Clipper</span>
+              <span class="logo-byline">by Offlyn.ai</span>
+            </span>
+          </a>
+          <p>The offline AI notepad for macOS.</p>
+        </div>
+      </div>
+      <div class="container footer-grid">
+        <div class="footer-col">
+          <h4>Privacy</h4>
+          <p>All transcription and AI runs on your Mac. Your data is never used to train models.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Product</h4>
+          <a href="#how-it-works">How it works</a><br />
+          <a href="#features">Features</a><br />
+          <a href="#privacy">Privacy</a>
+        </div>
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <a href="mailto:hello@offlyn.ai">hello@offlyn.ai</a>
+        </div>
+      </div>
+      <div class="container footer-bottom">
+        © 2026 Offlyn.ai · Offline by default · Mac only
+      </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
