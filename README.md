@@ -16,6 +16,8 @@ Pushes to `main` deploy automatically to GitHub Pages via Actions.
 
 Live site: https://joelnishanth.github.io/clipper-website/
 
+Color palette: [docs/color-scheme.md](docs/color-scheme.md)
+
 ## Structure
 
 - `index.html` — landing page
