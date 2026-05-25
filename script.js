@@ -190,25 +190,25 @@
       ],
     },
     {
-      name: "1 on 1",
-      title: "Casey <> Rahul 1 on 1",
-      meta: "Today · Casey, Rahul",
+      name: "Field service",
+      title: "CAT 390F — hydraulic fault, Pit 7",
+      meta: "Today · Ravi Okonkwo, on-site · Manual: CAT 390F O&M (312 pp.)",
       sections: [
         {
-          heading: "Wins this week",
-          items: ["Shipped meeting detection banner", "Closed two customer discovery calls"],
+          heading: "Fault reported",
+          items: ["Boom drift >40 mm/min with load — operator pulled machine", "Error code E362: main relief valve pressure low"],
         },
         {
-          heading: "Blockers",
-          items: ["Waiting on design review for settings page", "Whisper model download slow on Intel Macs"],
+          heading: "Diagnosis (ref: manual pp. 187–194)",
+          items: ["Main relief valve tested at 4,200 psi — spec is 5,100 psi", "Hydraulic oil sample dark, metallic particles visible", "Boom cylinder rod seal weeping — minor external leak"],
         },
         {
-          heading: "Career goals",
-          items: ["Want more ownership of the AI pipeline", "Interested in leading user research sessions"],
+          heading: "Parts & actions taken",
+          items: ["Replaced main relief valve cartridge (P/N 284-5658)", "Drained and refilled hydraulic tank — 120 gal CAT HYDO Advanced 10W", "Torqued valve cap to 280 ft-lb per manual p. 192"],
         },
         {
-          heading: "Action items",
-          items: ["Casey: share performance benchmarks by Friday", "Rahul: draft research interview guide"],
+          heading: "Follow-up required",
+          items: ["Order boom cylinder reseal kit — schedule for next planned downtime", "Re-sample hydraulic oil at 50-hr mark to confirm no continued contamination", "Update fleet maintenance log in SAP once back in cell range"],
         },
       ],
     },
@@ -267,7 +267,7 @@
   const TAB_INTERVAL_MS = 4000;
 
   function renderTemplateSections(template) {
-    const container = document.getElementById("template-sections");
+    const container = document.getElementById("hero-template-sections");
     if (!container) return;
     container.innerHTML = "";
 
@@ -293,9 +293,9 @@
   }
 
   function initTemplateDemo() {
-    const tabsEl = document.querySelector(".template-tabs");
-    const titleEl = document.querySelector(".template-meeting-title");
-    const metaEl = document.querySelector(".template-meeting-meta");
+    const tabsEl = document.querySelector(".hero-template-tabs");
+    const titleEl = document.querySelector(".hero-meeting-title");
+    const metaEl = document.querySelector(".hero-meeting-meta");
     if (!tabsEl || !titleEl || !metaEl) return;
 
     let activeIndex = 0;
