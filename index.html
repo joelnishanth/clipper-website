@@ -45,7 +45,7 @@
       <!-- Hero -->
       <section class="hero-wrap">
         <div class="container hero-grid hero">
-          <div>
+          <div class="hero-copy">
             <p class="eyebrow">Offline · Local · Mac-native</p>
             <h1>The offline AI notepad for people in back-to-back meetings</h1>
             <p class="hero-lead">
@@ -56,14 +56,21 @@
               <a href="#download" class="btn btn-primary">Download for Mac</a>
               <a href="#how-it-works" class="btn btn-secondary">See how it works</a>
             </div>
+            <div class="hero-template-tabs" role="tablist" aria-label="Meeting note templates"></div>
           </div>
           <div class="hero-visual">
-            <img
-              src="assets/hero-mock.svg"
-              alt="Clipper meeting notes interface"
-              width="1280"
-              height="720"
-            />
+            <div class="demo-window hero-template-window">
+              <div class="demo-window-bar">
+                <span class="demo-dot demo-dot-red"></span>
+                <span class="demo-dot demo-dot-yellow"></span>
+                <span class="demo-dot demo-dot-green"></span>
+              </div>
+              <div class="demo-window-body hero-template-body">
+                <p class="notes-title hero-meeting-title"></p>
+                <p class="notes-meta hero-meeting-meta"></p>
+                <div class="hero-template-sections" id="hero-template-sections"></div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -256,34 +263,6 @@
             <div class="stat-card">
               <div class="stat-value">100%</div>
               <div class="stat-label">Audio processed on Mac</div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Meeting templates demo -->
-      <section class="section section-templates" id="templates-demo">
-        <div class="container template-demo-grid">
-          <div class="template-demo-copy">
-            <h2 class="section-title">Get notes in the format your team needs</h2>
-            <p class="section-subtitle">
-              Customizable templates for customer discovery, user interviews, 1 on 1s, and more —
-              all generated locally on your Mac.
-            </p>
-            <div class="template-tabs" role="tablist" aria-label="Meeting note templates"></div>
-          </div>
-          <div class="template-preview-wrap">
-            <div class="demo-window template-window">
-              <div class="demo-window-bar">
-                <span class="demo-dot demo-dot-red"></span>
-                <span class="demo-dot demo-dot-yellow"></span>
-                <span class="demo-dot demo-dot-green"></span>
-              </div>
-              <div class="demo-window-body template-window-body">
-                <p class="notes-title template-meeting-title"></p>
-                <p class="notes-meta template-meeting-meta"></p>
-                <div class="template-sections" id="template-sections"></div>
-              </div>
             </div>
           </div>
         </div>
