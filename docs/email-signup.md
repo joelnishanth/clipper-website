@@ -1,8 +1,10 @@
 # Email signup on download
 
-Updated: 2026-05-24
+Updated: 2026-05-26
 
 The marketing site captures email **when the user clicks any “Download for Mac” button**, then starts the DMG download.
+
+**Email verification** (6-digit code) is available when `verificationApi` is configured. See [email-verification.md](email-verification.md) for Worker + Resend setup.
 
 ## Recommended stack: Formspree + static site
 
@@ -25,6 +27,7 @@ The marketing site captures email **when the user clicks any “Download for Mac
 window.CLIPPER_SIGNUP = {
   downloadUrl: "https://github.com/joelnishanth/clipper-website/releases/download/v1.2.0/Clipper-1.2.0.dmg",
   formEndpoint: "https://formspree.io/f/YOUR_FORM_ID",
+  verificationApi: "https://clipper-signup-api.your-account.workers.dev", // or null
   storageKey: "clipper_download_registered_v1",
 };
 ```
@@ -45,12 +48,16 @@ window.CLIPPER_SIGNUP = {
 ```
 Click "Download for Mac"
         │
-        ├─ download-status.json → available: true + already signed up? → DMG download
+        ├─ Returning verified user (same email)? → DMG download
         │
-        ├─ Already signed up but no release yet? → waitlist / high-demand message
+        ├─ verificationApi configured? → email → 6-digit code → verify → download
         │
-        └─ First visit → modal → email → Formspree → download or pending message
+        ├─ download-status.json → available: false → waitlist message
+        │
+        └─ First visit (no verification) → modal → email → Formspree → download or waitlist
 ```
+
+See [email-verification.md](email-verification.md) for the verification step.
 
 ## Download 404
 

@@ -627,12 +627,49 @@
             />
             <p class="download-modal-error" id="download-signup-error" hidden></p>
             <button type="submit" class="btn btn-primary download-modal-submit" id="download-signup-submit">
-              Download for Mac
+              Continue
             </button>
           </form>
           <p class="download-modal-fine">
             Your email is used for Clipper updates only. Audio and notes stay on your Mac.
           </p>
+        </div>
+        <div id="download-verify-state" hidden>
+          <p class="download-modal-eyebrow">Verify email</p>
+          <h2 class="download-modal-title">Check your inbox</h2>
+          <p class="download-modal-lead">
+            We sent a 6-digit code to
+            <strong class="download-modal-email" id="verify-email-display"></strong>.
+            Enter it below to confirm your email and download Clipper.
+          </p>
+          <form class="download-modal-form" id="download-verify-form" novalidate>
+            <label class="sr-only" for="signup-verify-code">Verification code</label>
+            <input
+              type="text"
+              id="signup-verify-code"
+              name="code"
+              class="download-modal-input download-modal-code"
+              placeholder="000000"
+              inputmode="numeric"
+              autocomplete="one-time-code"
+              maxlength="6"
+              pattern="[0-9]{6}"
+              required
+            />
+            <p class="download-modal-error" id="download-verify-error" hidden></p>
+            <button type="submit" class="btn btn-primary download-modal-submit" id="download-verify-submit">
+              Verify and download
+            </button>
+          </form>
+          <div class="download-modal-verify-actions">
+            <button type="button" class="download-modal-link" id="download-verify-resend">
+              Resend code
+            </button>
+            <button type="button" class="download-modal-link" id="download-verify-back">
+              Use a different email
+            </button>
+          </div>
+          <p class="download-modal-fine">Code expires in 10 minutes. Check spam if you do not see it.</p>
         </div>
         <div class="download-modal-success" id="download-success-state" hidden>
           <p class="download-modal-eyebrow">High demand</p>

@@ -1,4 +1,4 @@
-/** @type {Readonly<{ downloadUrl: string; formEndpoint: string | null; storageKey: string; emailStorageKey: string }>} */
+/** @type {Readonly<{ downloadUrl: string; formEndpoint: string | null; verificationApi: string | null; storageKey: string; emailStorageKey: string }>} */
 window.CLIPPER_SIGNUP = {
   /** GitHub release DMG — opened after successful signup */
   downloadUrl:
@@ -11,7 +11,14 @@ window.CLIPPER_SIGNUP = {
    */
   formEndpoint: "https://formspree.io/f/xlgvppoa",
 
-  /** localStorage key — set after a successful signup */
+  /**
+   * Cloudflare Worker URL for email verification (see docs/email-verification.md).
+   * Example: "https://clipper-signup-api.your-subdomain.workers.dev"
+   * Set to null to skip verification (local UI testing only).
+   */
+  verificationApi: null,
+
+  /** localStorage key — set after a successful verified signup */
   storageKey: "clipper_download_registered_v1",
 
   /** Saved email for pre-fill on repeat download clicks */

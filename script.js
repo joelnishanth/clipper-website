@@ -14,6 +14,7 @@
     downloadUrl:
       "https://github.com/joelnishanth/clipper-website/releases/download/v1.2.0/Clipper-1.2.0.dmg",
     formEndpoint: null,
+    verificationApi: null,
     storageKey: "clipper_download_registered_v1",
     emailStorageKey: "clipper_download_email_v1",
   };
@@ -26,10 +27,19 @@
     const errorEl = document.getElementById("download-signup-error");
     const submitBtn = document.getElementById("download-signup-submit");
     const signupState = document.getElementById("download-signup-state");
+    const verifyState = document.getElementById("download-verify-state");
+    const verifyForm = document.getElementById("download-verify-form");
+    const codeInput = document.getElementById("signup-verify-code");
+    const verifyErrorEl = document.getElementById("download-verify-error");
+    const verifySubmitBtn = document.getElementById("download-verify-submit");
+    const verifyEmailDisplay = document.getElementById("verify-email-display");
+    const resendBtn = document.getElementById("download-verify-resend");
+    const backBtn = document.getElementById("download-verify-back");
     const successState = document.getElementById("download-success-state");
     const successTextEl = document.getElementById("download-signup-success-text");
     const releasesLink = document.getElementById("download-releases-link");
     const triggers = document.querySelectorAll(".js-download");
+    const verificationEnabled = Boolean(signupConfig.verificationApi);
 
     if (!modal || !form || !emailInput || !submitBtn) return;
 
@@ -40,6 +50,8 @@
       pendingMessage:
         "We're experiencing a surge in demand right now. You've been added to the waitlist — we'll email you as soon as a download opens up.",
     };
+    let pendingEmail = "";
+    let resendTimerId = 0;
 
     const loadDownloadStatus = async () => {
       try {
@@ -86,15 +98,46 @@
       link.remove();
     };
 
+    const setSubmitLabel = () => {
+      const storedEmail = savedEmail();
+      const currentEmail = emailInput.value.trim().toLowerCase();
+      const returningUser = isRegistered() && storedEmail && storedEmail === currentEmail;
+
+      if (returningUser) {
+        submitBtn.textContent = "Download for Mac";
+        return;
+      }
+
+      submitBtn.textContent = verificationEnabled ? "Send verification code" : "Download for Mac";
+    };
+
     const showSignupForm = () => {
       if (signupState) signupState.hidden = false;
+      if (verifyState) verifyState.hidden = true;
       if (successState) successState.hidden = true;
       submitBtn.disabled = false;
-      submitBtn.textContent = "Download for Mac";
+      setSubmitLabel();
+      if (verifyErrorEl) verifyErrorEl.hidden = true;
+      if (codeInput) codeInput.value = "";
+    };
+
+    const showVerifyForm = (email) => {
+      pendingEmail = email;
+      if (signupState) signupState.hidden = true;
+      if (verifyState) verifyState.hidden = false;
+      if (successState) successState.hidden = true;
+      if (verifyEmailDisplay) verifyEmailDisplay.textContent = email;
+      if (verifyErrorEl) verifyErrorEl.hidden = true;
+      if (verifySubmitBtn) {
+        verifySubmitBtn.disabled = false;
+        verifySubmitBtn.textContent = "Verify and download";
+      }
+      window.setTimeout(() => codeInput?.focus(), 50);
     };
 
     const showPendingMessage = () => {
       if (signupState) signupState.hidden = true;
+      if (verifyState) verifyState.hidden = true;
       if (successState) successState.hidden = false;
       if (successTextEl) {
         successTextEl.textContent = downloadStatus.pendingMessage || downloadStatus.message || "";
@@ -118,6 +161,7 @@
       } else {
         emailInput.value = "";
       }
+      setSubmitLabel();
       modal.hidden = false;
       modal.setAttribute("aria-hidden", "false");
       document.body.style.overflow = "hidden";
@@ -129,7 +173,16 @@
       modal.setAttribute("aria-hidden", "true");
       document.body.style.overflow = "";
       if (errorEl) errorEl.hidden = true;
+      if (verifyErrorEl) verifyErrorEl.hidden = true;
       form.reset();
+      verifyForm?.reset();
+      pendingEmail = "";
+      window.clearInterval(resendTimerId);
+      resendTimerId = 0;
+      if (resendBtn) {
+        resendBtn.disabled = false;
+        resendBtn.textContent = "Resend code";
+      }
       showSignupForm();
     };
 
@@ -143,13 +196,13 @@
       showPendingMessage();
     };
 
-    const showError = (message) => {
-      if (!errorEl) return;
-      errorEl.textContent = message;
-      errorEl.hidden = false;
+    const showError = (message, target = errorEl) => {
+      if (!target) return;
+      target.textContent = message;
+      target.hidden = false;
     };
 
-    const parseFormspreeError = async (response) => {
+    const parseApiError = async (response) => {
       try {
         const data = await response.json();
         if (typeof data.error === "string") return data.error;
@@ -162,9 +215,69 @@
       return "Something went wrong. Try again or email hello@offlyn.ai.";
     };
 
-    const submitSignup = async (email) => {
+    const verificationApiUrl = (path) => {
+      const base = (signupConfig.verificationApi || "").replace(/\/$/, "");
+      return `${base}${path}`;
+    };
+
+    const requestVerificationCode = async (email) => {
+      const response = await fetch(verificationApiUrl("/v1/send-code"), {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email }),
+      });
+
+      if (!response.ok) {
+        throw new Error(await parseApiError(response));
+      }
+    };
+
+    const verifyEmailCode = async (email, code) => {
+      const response = await fetch(verificationApiUrl("/v1/verify-code"), {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, code }),
+      });
+
+      if (!response.ok) {
+        throw new Error(await parseApiError(response));
+      }
+    };
+
+    const startResendCooldown = (seconds = 60) => {
+      if (!resendBtn) return;
+      let remaining = seconds;
+      resendBtn.disabled = true;
+      resendBtn.textContent = `Resend code in ${remaining}s`;
+
+      window.clearInterval(resendTimerId);
+      resendTimerId = window.setInterval(() => {
+        remaining -= 1;
+        if (remaining <= 0) {
+          window.clearInterval(resendTimerId);
+          resendTimerId = 0;
+          resendBtn.disabled = false;
+          resendBtn.textContent = "Resend code";
+          return;
+        }
+        resendBtn.textContent = `Resend code in ${remaining}s`;
+      }, 1000);
+    };
+
+    const submitSignup = async (email, { verified = false } = {}) => {
       if (isRegistered() && savedEmail() === email) {
         return { ok: true, skipped: true };
+      }
+
+      if (verified && signupConfig.verificationApi) {
+        markRegistered(email);
+        return { ok: true, verified: true };
       }
 
       if (!signupConfig.formEndpoint) {
@@ -187,7 +300,7 @@
       });
 
       if (!response.ok) {
-        throw new Error(await parseFormspreeError(response));
+        throw new Error(await parseApiError(response));
       }
 
       markRegistered(email);
@@ -218,11 +331,13 @@
       if (event.key === "Escape" && !modal.hidden) closeModal();
     });
 
+    emailInput.addEventListener("input", setSubmitLabel);
+
     form.addEventListener("submit", async (event) => {
       event.preventDefault();
       if (errorEl) errorEl.hidden = true;
 
-      const email = emailInput.value.trim();
+      const email = emailInput.value.trim().toLowerCase();
       if (!email || !emailInput.checkValidity()) {
         showError("Enter a valid email address.");
         emailInput.focus();
@@ -230,16 +345,109 @@
       }
 
       submitBtn.disabled = true;
-      submitBtn.textContent = "Starting download…";
+      const returningUser = isRegistered() && savedEmail() === email;
+
+      if (returningUser) {
+        submitBtn.textContent = "Starting download…";
+      } else if (verificationEnabled) {
+        submitBtn.textContent = "Sending code…";
+      } else {
+        submitBtn.textContent = "Starting download…";
+      }
 
       try {
+        if (returningUser) {
+          await completeDownloadFlow();
+          return;
+        }
+
+        if (verificationEnabled) {
+          await requestVerificationCode(email);
+          showVerifyForm(email);
+          startResendCooldown();
+          return;
+        }
+
         await submitSignup(email);
         await completeDownloadFlow();
       } catch (error) {
-        showError(error instanceof Error ? error.message : "Could not submit. Try again.");
+        showError(error instanceof Error ? error.message : "Could not continue. Try again.");
+      } finally {
         submitBtn.disabled = false;
-        submitBtn.textContent = "Download for Mac";
+        setSubmitLabel();
       }
+    });
+
+    verifyForm?.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      if (verifyErrorEl) verifyErrorEl.hidden = true;
+
+      const code = codeInput?.value.trim() || "";
+      if (!/^\d{6}$/.test(code)) {
+        showError("Enter the 6-digit code from your email.", verifyErrorEl);
+        codeInput?.focus();
+        return;
+      }
+
+      if (!pendingEmail) {
+        showSignupForm();
+        showError("Enter your email again to request a new code.");
+        return;
+      }
+
+      if (verifySubmitBtn) {
+        verifySubmitBtn.disabled = true;
+        verifySubmitBtn.textContent = "Verifying…";
+      }
+
+      try {
+        await verifyEmailCode(pendingEmail, code);
+        await submitSignup(pendingEmail, { verified: true });
+        await completeDownloadFlow();
+      } catch (error) {
+        showError(
+          error instanceof Error ? error.message : "Could not verify code. Try again.",
+          verifyErrorEl
+        );
+        if (verifySubmitBtn) {
+          verifySubmitBtn.disabled = false;
+          verifySubmitBtn.textContent = "Verify and download";
+        }
+      }
+    });
+
+    resendBtn?.addEventListener("click", async () => {
+      if (!pendingEmail || resendBtn.disabled) return;
+      if (verifyErrorEl) verifyErrorEl.hidden = true;
+      resendBtn.disabled = true;
+      resendBtn.textContent = "Sending…";
+
+      try {
+        await requestVerificationCode(pendingEmail);
+        startResendCooldown();
+        codeInput?.focus();
+      } catch (error) {
+        showError(
+          error instanceof Error ? error.message : "Could not resend code. Try again.",
+          verifyErrorEl
+        );
+        resendBtn.disabled = false;
+        resendBtn.textContent = "Resend code";
+      }
+    });
+
+    backBtn?.addEventListener("click", () => {
+      pendingEmail = "";
+      verifyForm?.reset();
+      if (verifyErrorEl) verifyErrorEl.hidden = true;
+      window.clearInterval(resendTimerId);
+      resendTimerId = 0;
+      if (resendBtn) {
+        resendBtn.disabled = false;
+        resendBtn.textContent = "Resend code";
+      }
+      showSignupForm();
+      emailInput.focus();
     });
   }
 

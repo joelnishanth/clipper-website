@@ -2048,3 +2048,44 @@ button {
 .download-modal-releases {
   justify-content: center;
 }
+
+.download-modal-email {
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+.download-modal-code {
+  text-align: center;
+  letter-spacing: 0.35em;
+  font-size: 1.25rem;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+}
+
+.download-modal-verify-actions {
+  margin-top: 0.75rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem 1.25rem;
+}
+
+.download-modal-link {
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  font-weight: 400;
+  color: var(--brand);
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+  transition: color 0.15s;
+}
+
+.download-modal-link:hover:not(:disabled) {
+  color: var(--text-primary);
+}
+
+.download-modal-link:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  text-decoration: none;
+}
