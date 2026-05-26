@@ -16,13 +16,13 @@ Pushes to `main` deploy automatically to GitHub Pages via Actions.
 
 Live site: https://joelnishanth.github.io/clipper-website/
 
-Download: https://github.com/joelnishanth/clipper-website/releases/latest/download/Clipper-latest.dmg
+Download: https://github.com/joelnishanth/clipper-website/releases/download/v1.2.0/Clipper-1.2.0.dmg
 
 Color palette: [docs/color-scheme.md](docs/color-scheme.md)
 
 Email signup: [docs/email-signup.md](docs/email-signup.md) — configure Formspree in `config.js`
 
-Release pipeline: [docs/release-setup.md](docs/release-setup.md)
+Release pipeline: Runs from the private `private-repo` repo. Only the final DMG is published here as a GitHub Release.
 
 ## Structure
 
