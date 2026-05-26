@@ -27,7 +27,7 @@
           <a href="#how-it-works">How it works</a>
           <a href="#features">Features</a>
           <a href="#privacy">Privacy</a>
-          <a href="#download" class="nav-cta">Download for Mac</a>
+          <a href="#download-app" class="nav-cta js-download">Download for Mac</a>
         </nav>
         <button class="menu-toggle" aria-label="Open menu" type="button">
           <span></span><span></span><span></span>
@@ -37,7 +37,7 @@
         <a href="#how-it-works">How it works</a>
         <a href="#features">Features</a>
         <a href="#privacy">Privacy</a>
-        <a href="#download">Download for Mac</a>
+        <a href="#download-app" class="js-download">Download for Mac</a>
       </nav>
     </header>
 
@@ -53,7 +53,7 @@
               and AI that never leaves your Mac.
             </p>
             <div class="hero-actions">
-              <a href="#download" class="btn btn-primary">Download for Mac</a>
+              <a href="#download-app" class="btn btn-primary js-download">Download for Mac</a>
               <a href="#how-it-works" class="btn btn-secondary">See how it works</a>
             </div>
             <div class="hero-template-tabs" role="tablist" aria-label="Meeting note templates"></div>
@@ -437,7 +437,7 @@
         <div class="container">
           <h2>Start taking better meeting notes — offline</h2>
           <p>Free beta for macOS. Apple Silicon recommended. No subscription required.</p>
-          <a href="#" class="btn btn-primary">Download for Mac</a>
+          <a href="#download-app" class="btn btn-primary js-download">Download for Mac</a>
           <p class="cta-fine">macOS 14+ · ~2 GB for models · No meeting bots · No cloud</p>
         </div>
       </section>
@@ -477,6 +477,47 @@
       </div>
     </footer>
 
+    <div class="download-modal" id="download-modal" hidden aria-hidden="true">
+      <div class="download-modal-backdrop" data-close-modal></div>
+      <div
+        class="download-modal-dialog"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="download-modal-title"
+      >
+        <button type="button" class="download-modal-close" data-close-modal aria-label="Close">
+          ×
+        </button>
+        <p class="download-modal-eyebrow">Free beta · macOS 14+</p>
+        <h2 id="download-modal-title" class="download-modal-title">Get Clipper for Mac</h2>
+        <p class="download-modal-lead">
+          Enter your email to download and get occasional product updates. No spam — unsubscribe
+          anytime.
+        </p>
+        <form class="download-modal-form" id="download-signup-form" novalidate>
+          <label class="sr-only" for="signup-email">Email address</label>
+          <input
+            type="email"
+            id="signup-email"
+            name="email"
+            class="download-modal-input"
+            placeholder="you@company.com"
+            autocomplete="email"
+            required
+          />
+          <input type="text" name="_gotcha" class="download-modal-honeypot" tabindex="-1" autocomplete="off" aria-hidden="true" />
+          <p class="download-modal-error" id="download-signup-error" hidden></p>
+          <button type="submit" class="btn btn-primary download-modal-submit" id="download-signup-submit">
+            Download for Mac
+          </button>
+        </form>
+        <p class="download-modal-fine">
+          Your email is used for Clipper updates only. Audio and notes stay on your Mac.
+        </p>
+      </div>
+    </div>
+
+    <script src="config.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
     <script src="script.js"></script>
   </body>

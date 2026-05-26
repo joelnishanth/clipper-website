@@ -10,6 +10,156 @@
     link.addEventListener("click", () => navMobile.classList.remove("open"));
   });
 
+  const signupConfig = window.CLIPPER_SIGNUP || {
+    downloadUrl:
+      "https://github.com/joelnishanth/clipper-website/releases/latest/download/Clipper-latest.dmg",
+    formEndpoint: null,
+    storageKey: "clipper_download_registered_v1",
+  };
+
+  /* ── Download + email signup ── */
+  function initDownloadSignup() {
+    const modal = document.getElementById("download-modal");
+    const form = document.getElementById("download-signup-form");
+    const emailInput = document.getElementById("signup-email");
+    const errorEl = document.getElementById("download-signup-error");
+    const submitBtn = document.getElementById("download-signup-submit");
+    const triggers = document.querySelectorAll(".js-download");
+
+    if (!modal || !form || !emailInput || !submitBtn) return;
+
+    const isRegistered = () => localStorage.getItem(signupConfig.storageKey) === "1";
+
+    const markRegistered = () => {
+      try {
+        localStorage.setItem(signupConfig.storageKey, "1");
+      } catch {
+        /* private browsing — ignore */
+      }
+    };
+
+    const triggerDownload = () => {
+      const link = document.createElement("a");
+      link.href = signupConfig.downloadUrl;
+      link.rel = "noopener";
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+    };
+
+    const openModal = () => {
+      modal.hidden = false;
+      modal.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+      window.setTimeout(() => emailInput.focus(), 50);
+    };
+
+    const closeModal = () => {
+      modal.hidden = true;
+      modal.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "";
+      if (errorEl) errorEl.hidden = true;
+      form.reset();
+      submitBtn.disabled = false;
+      submitBtn.textContent = "Download for Mac";
+    };
+
+    const showError = (message) => {
+      if (!errorEl) return;
+      errorEl.textContent = message;
+      errorEl.hidden = false;
+    };
+
+    const submitSignup = async (email) => {
+      if (!signupConfig.formEndpoint) {
+        markRegistered();
+        return { ok: true, skipped: true };
+      }
+
+      const response = await fetch(signupConfig.formEndpoint, {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email,
+          source: "clipper-website-download",
+          _subject: "Clipper download signup",
+        }),
+      });
+
+      if (!response.ok) {
+        let detail = "Something went wrong. Try again or email hello@offlyn.ai.";
+        try {
+          const data = await response.json();
+          if (data.error) detail = data.error;
+        } catch {
+          /* use default */
+        }
+        throw new Error(detail);
+      }
+
+      markRegistered();
+      return { ok: true };
+    };
+
+    const handleDownloadIntent = (event) => {
+      event.preventDefault();
+      navMobile?.classList.remove("open");
+
+      if (isRegistered()) {
+        triggerDownload();
+        return;
+      }
+
+      openModal();
+    };
+
+    triggers.forEach((trigger) => {
+      trigger.addEventListener("click", handleDownloadIntent);
+    });
+
+    modal.querySelectorAll("[data-close-modal]").forEach((el) => {
+      el.addEventListener("click", closeModal);
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && !modal.hidden) closeModal();
+    });
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      if (errorEl) errorEl.hidden = true;
+
+      const honeypot = form.querySelector('input[name="_gotcha"]');
+      if (honeypot?.value) {
+        closeModal();
+        return;
+      }
+
+      const email = emailInput.value.trim();
+      if (!email || !emailInput.checkValidity()) {
+        showError("Enter a valid email address.");
+        emailInput.focus();
+        return;
+      }
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = "Starting download…";
+
+      try {
+        await submitSignup(email);
+        closeModal();
+        triggerDownload();
+      } catch (error) {
+        showError(error instanceof Error ? error.message : "Could not submit. Try again.");
+        submitBtn.disabled = false;
+        submitBtn.textContent = "Download for Mac";
+      }
+    });
+  }
+
   const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   /* ── Notes enhancement demo (GSAP crossfade) ── */
@@ -362,6 +512,7 @@
     restartAutoRotate();
   }
 
+  initDownloadSignup();
   initNotesDemo();
   initTranscriptDemo();
   initTemplateDemo();
