@@ -24,9 +24,34 @@
     const emailInput = document.getElementById("signup-email");
     const errorEl = document.getElementById("download-signup-error");
     const submitBtn = document.getElementById("download-signup-submit");
+    const successEl = document.getElementById("download-signup-success");
+    const successTextEl = document.getElementById("download-signup-success-text");
+    const releasesLink = document.getElementById("download-releases-link");
+    const modalFine = modal?.querySelector(".download-modal-fine");
     const triggers = document.querySelectorAll(".js-download");
 
     if (!modal || !form || !emailInput || !submitBtn) return;
+
+    let downloadStatus = {
+      available: false,
+      downloadUrl: signupConfig.downloadUrl,
+      releasesUrl: "https://github.com/joelnishanth/clipper-website/releases",
+      pendingMessage:
+        "You're on the list. The Mac download isn't published yet — we'll email you when it's ready.",
+    };
+
+    const loadDownloadStatus = async () => {
+      try {
+        const response = await fetch("/download-status.json", { cache: "no-store" });
+        if (!response.ok) return;
+        const data = await response.json();
+        downloadStatus = { ...downloadStatus, ...data };
+      } catch {
+        /* use defaults */
+      }
+    };
+
+    loadDownloadStatus();
 
     const isRegistered = () => localStorage.getItem(signupConfig.storageKey) === "1";
 
@@ -39,15 +64,43 @@
     };
 
     const triggerDownload = () => {
+      const url = downloadStatus.downloadUrl || signupConfig.downloadUrl;
       const link = document.createElement("a");
-      link.href = signupConfig.downloadUrl;
+      link.href = url;
       link.rel = "noopener";
       document.body.appendChild(link);
       link.click();
       link.remove();
     };
 
+    const showSignupForm = () => {
+      form.hidden = false;
+      if (successEl) successEl.hidden = true;
+      if (modalFine) modalFine.hidden = false;
+      submitBtn.disabled = false;
+      submitBtn.textContent = "Download for Mac";
+    };
+
+    const showPendingMessage = () => {
+      form.hidden = true;
+      if (modalFine) modalFine.hidden = true;
+      if (successEl) successEl.hidden = false;
+      if (successTextEl) {
+        successTextEl.textContent = downloadStatus.pendingMessage || downloadStatus.message || "";
+      }
+      if (releasesLink) {
+        const releasesUrl = downloadStatus.releasesUrl;
+        if (releasesUrl) {
+          releasesLink.href = releasesUrl;
+          releasesLink.hidden = false;
+        } else {
+          releasesLink.hidden = true;
+        }
+      }
+    };
+
     const openModal = () => {
+      showSignupForm();
       modal.hidden = false;
       modal.setAttribute("aria-hidden", "false");
       document.body.style.overflow = "hidden";
@@ -60,8 +113,17 @@
       document.body.style.overflow = "";
       if (errorEl) errorEl.hidden = true;
       form.reset();
-      submitBtn.disabled = false;
-      submitBtn.textContent = "Download for Mac";
+      showSignupForm();
+    };
+
+    const completeDownloadFlow = async () => {
+      await loadDownloadStatus();
+      if (downloadStatus.available) {
+        closeModal();
+        triggerDownload();
+        return;
+      }
+      showPendingMessage();
     };
 
     const showError = (message) => {
@@ -104,12 +166,18 @@
       return { ok: true };
     };
 
-    const handleDownloadIntent = (event) => {
+    const handleDownloadIntent = async (event) => {
       event.preventDefault();
       navMobile?.classList.remove("open");
+      await loadDownloadStatus();
 
       if (isRegistered()) {
-        triggerDownload();
+        if (downloadStatus.available) {
+          triggerDownload();
+        } else {
+          openModal();
+          showPendingMessage();
+        }
         return;
       }
 
@@ -150,8 +218,7 @@
 
       try {
         await submitSignup(email);
-        closeModal();
-        triggerDownload();
+        await completeDownloadFlow();
       } catch (error) {
         showError(error instanceof Error ? error.message : "Could not submit. Try again.");
         submitBtn.disabled = false;
