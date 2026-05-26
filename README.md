@@ -1,6 +1,6 @@
 # Clipper — Marketing Site
 
-Static marketing website for [Clipper](https://github.com/offlyn-ai/clipper) by Offlyn.ai.
+Static marketing website for [Clipper](https://offlyn.ai) by Offlyn.ai.
 
 ## Local development
 
@@ -22,7 +22,7 @@ Color palette: [docs/color-scheme.md](docs/color-scheme.md)
 
 Email signup: [docs/email-signup.md](docs/email-signup.md) — configure Formspree in `config.js`
 
-Release pipeline: Runs from the private `private-repo` repo. Only the final DMG is published here as a GitHub Release.
+Release pipeline: Runs from a private repo. Only the final DMG is published here as a GitHub Release.
 
 ## Structure
 
