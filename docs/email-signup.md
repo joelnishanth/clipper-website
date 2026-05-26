@@ -96,7 +96,7 @@ The modal states emails are for Clipper updates only. Link to a privacy policy w
 2. **Disable reCAPTCHA** on this form — AJAX signup cannot complete reCAPTCHA unless you embed their widget. In Formspree → form → Settings → disable reCAPTCHA.
 3. **Check spam** in Formspree and in `hello@offlyn.ai`.
 4. **Ad blockers** — some block `formspree.io`. Test in a private window with extensions off.
-5. **Repeat visits** — after one successful signup, the modal is skipped (`localStorage` key `clipper_download_registered_v1`). Clear it in DevTools to re-test.
+5. **Repeat visits** — the email modal always opens on Download. Returning users see their saved email pre-filled (`clipper_download_email_v1`); clear `clipper_download_registered_v1` and `clipper_download_email_v1` in DevTools to re-test as a new visitor.
 
 ### User sees an error in the modal
 

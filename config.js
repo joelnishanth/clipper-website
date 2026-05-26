@@ -1,4 +1,4 @@
-/** @type {Readonly<{ downloadUrl: string; formEndpoint: string | null; storageKey: string }>} */
+/** @type {Readonly<{ downloadUrl: string; formEndpoint: string | null; storageKey: string; emailStorageKey: string }>} */
 window.CLIPPER_SIGNUP = {
   /** GitHub release DMG — opened after successful signup */
   downloadUrl:
@@ -11,6 +11,9 @@ window.CLIPPER_SIGNUP = {
    */
   formEndpoint: "https://formspree.io/f/xlgvppoa",
 
-  /** localStorage key — repeat visitors skip the modal */
+  /** localStorage key — set after a successful signup */
   storageKey: "clipper_download_registered_v1",
+
+  /** Saved email for pre-fill on repeat download clicks */
+  emailStorageKey: "clipper_download_email_v1",
 };

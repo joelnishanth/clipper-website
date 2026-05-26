@@ -15,6 +15,7 @@
       "https://github.com/joelnishanth/clipper-website/releases/download/v1.2.0/Clipper-1.2.0.dmg",
     formEndpoint: null,
     storageKey: "clipper_download_registered_v1",
+    emailStorageKey: "clipper_download_email_v1",
   };
 
   /* ── Download + email signup ── */
@@ -53,11 +54,23 @@
 
     loadDownloadStatus();
 
+    const emailStorageKey =
+      signupConfig.emailStorageKey || `${signupConfig.storageKey}_email`;
+
     const isRegistered = () => localStorage.getItem(signupConfig.storageKey) === "1";
 
-    const markRegistered = () => {
+    const savedEmail = () => {
+      try {
+        return localStorage.getItem(emailStorageKey) || "";
+      } catch {
+        return "";
+      }
+    };
+
+    const markRegistered = (email) => {
       try {
         localStorage.setItem(signupConfig.storageKey, "1");
+        if (email) localStorage.setItem(emailStorageKey, email);
       } catch {
         /* private browsing — ignore */
       }
@@ -99,6 +112,12 @@
 
     const openModal = () => {
       showSignupForm();
+      const storedEmail = savedEmail();
+      if (storedEmail) {
+        emailInput.value = storedEmail;
+      } else {
+        emailInput.value = "";
+      }
       modal.hidden = false;
       modal.setAttribute("aria-hidden", "false");
       document.body.style.overflow = "hidden";
@@ -144,8 +163,12 @@
     };
 
     const submitSignup = async (email) => {
+      if (isRegistered() && savedEmail() === email) {
+        return { ok: true, skipped: true };
+      }
+
       if (!signupConfig.formEndpoint) {
-        markRegistered();
+        markRegistered(email);
         return { ok: true, skipped: true };
       }
 
@@ -167,7 +190,7 @@
         throw new Error(await parseFormspreeError(response));
       }
 
-      markRegistered();
+      markRegistered(email);
       return { ok: true };
     };
 
@@ -176,17 +199,11 @@
       navMobile?.classList.remove("open");
       await loadDownloadStatus();
 
-      if (isRegistered()) {
-        if (downloadStatus.available) {
-          triggerDownload();
-        } else {
-          openModal();
-          showPendingMessage();
-        }
-        return;
-      }
-
       openModal();
+
+      if (isRegistered() && !downloadStatus.available) {
+        showPendingMessage();
+      }
     };
 
     triggers.forEach((trigger) => {
