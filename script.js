@@ -37,7 +37,7 @@
       downloadUrl: signupConfig.downloadUrl,
       releasesUrl: "https://github.com/joelnishanth/clipper-website/releases",
       pendingMessage:
-        "You're on the list. The Mac download isn't published yet — we'll email you when it's ready.",
+        "We're experiencing a surge in demand right now. You've been added to the waitlist — we'll email you as soon as a download opens up.",
     };
 
     const loadDownloadStatus = async () => {

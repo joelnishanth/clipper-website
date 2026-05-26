@@ -192,7 +192,7 @@ jobs:
             "available": true,
             "downloadUrl": "https://github.com/joelnishanth/clipper-website/releases/latest/download/Clipper-latest.dmg",
             "releasesUrl": "https://github.com/joelnishanth/clipper-website/releases",
-            "pendingMessage": "You're on the list. Download starting…"
+            "pendingMessage": "We're experiencing a surge in demand right now. You've been added to the waitlist — we'll email you as soon as a download opens up."
           }
           EOF
           git config user.name "github-actions[bot]"
