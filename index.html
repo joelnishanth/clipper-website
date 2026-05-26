@@ -601,40 +601,43 @@
         <button type="button" class="download-modal-close" data-close-modal aria-label="Close">
           ×
         </button>
-        <p class="download-modal-eyebrow">Free beta · macOS 14+</p>
-        <h2 id="download-modal-title" class="download-modal-title">Get Clipper for Mac</h2>
-        <p class="download-modal-lead">
-          Enter your email to download and get occasional product updates. No spam — unsubscribe
-          anytime.
-        </p>
-        <form class="download-modal-form" id="download-signup-form" novalidate>
-          <label class="sr-only" for="signup-email">Email address</label>
-          <input
-            type="email"
-            id="signup-email"
-            name="email"
-            class="download-modal-input"
-            placeholder="you@company.com"
-            autocomplete="email"
-            required
-          />
-          <input type="text" name="_gotcha" class="download-modal-honeypot" tabindex="-1" autocomplete="off" aria-hidden="true" />
-          <p class="download-modal-error" id="download-signup-error" hidden></p>
-          <button type="submit" class="btn btn-primary download-modal-submit" id="download-signup-submit">
-            Download for Mac
-          </button>
-        </form>
-        <div class="download-modal-success" id="download-signup-success" hidden>
-          <p class="download-modal-success-title">You're on the waitlist</p>
+        <div id="download-signup-state">
+          <p class="download-modal-eyebrow">Free beta · macOS 14+</p>
+          <h2 id="download-modal-title" class="download-modal-title">Get Clipper for Mac</h2>
+          <p class="download-modal-lead">
+            Enter your email to download and get occasional product updates. No spam — unsubscribe
+            anytime.
+          </p>
+          <form class="download-modal-form" id="download-signup-form" novalidate>
+            <label class="sr-only" for="signup-email">Email address</label>
+            <input
+              type="email"
+              id="signup-email"
+              name="email"
+              class="download-modal-input"
+              placeholder="you@company.com"
+              autocomplete="email"
+              required
+            />
+            <input type="text" name="_gotcha" class="download-modal-honeypot" tabindex="-1" autocomplete="off" aria-hidden="true" />
+            <p class="download-modal-error" id="download-signup-error" hidden></p>
+            <button type="submit" class="btn btn-primary download-modal-submit" id="download-signup-submit">
+              Download for Mac
+            </button>
+          </form>
+          <p class="download-modal-fine">
+            Your email is used for Clipper updates only. Audio and notes stay on your Mac.
+          </p>
+        </div>
+        <div class="download-modal-success" id="download-success-state" hidden>
+          <p class="download-modal-eyebrow">High demand</p>
+          <h2 class="download-modal-title">You're on the waitlist</h2>
           <p class="download-modal-success-text" id="download-signup-success-text"></p>
           <a href="#" class="btn btn-secondary download-modal-releases" id="download-releases-link" hidden>
             View releases
           </a>
           <button type="button" class="btn btn-primary" data-close-modal>Done</button>
         </div>
-        <p class="download-modal-fine">
-          Your email is used for Clipper updates only. Audio and notes stay on your Mac.
-        </p>
       </div>
     </div>
 

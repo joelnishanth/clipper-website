@@ -24,10 +24,10 @@
     const emailInput = document.getElementById("signup-email");
     const errorEl = document.getElementById("download-signup-error");
     const submitBtn = document.getElementById("download-signup-submit");
-    const successEl = document.getElementById("download-signup-success");
+    const signupState = document.getElementById("download-signup-state");
+    const successState = document.getElementById("download-success-state");
     const successTextEl = document.getElementById("download-signup-success-text");
     const releasesLink = document.getElementById("download-releases-link");
-    const modalFine = modal?.querySelector(".download-modal-fine");
     const triggers = document.querySelectorAll(".js-download");
 
     if (!modal || !form || !emailInput || !submitBtn) return;
@@ -74,17 +74,15 @@
     };
 
     const showSignupForm = () => {
-      form.hidden = false;
-      if (successEl) successEl.hidden = true;
-      if (modalFine) modalFine.hidden = false;
+      if (signupState) signupState.hidden = false;
+      if (successState) successState.hidden = true;
       submitBtn.disabled = false;
       submitBtn.textContent = "Download for Mac";
     };
 
     const showPendingMessage = () => {
-      form.hidden = true;
-      if (modalFine) modalFine.hidden = true;
-      if (successEl) successEl.hidden = false;
+      if (signupState) signupState.hidden = true;
+      if (successState) successState.hidden = false;
       if (successTextEl) {
         successTextEl.textContent = downloadStatus.pendingMessage || downloadStatus.message || "";
       }
