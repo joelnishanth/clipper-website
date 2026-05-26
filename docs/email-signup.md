@@ -47,7 +47,7 @@ Click "Download for Mac"
         │
         ├─ download-status.json → available: true + already signed up? → DMG download
         │
-        ├─ Already signed up but no release yet? → “You're on the list” message
+        ├─ Already signed up but no release yet? → waitlist / high-demand message
         │
         └─ First visit → modal → email → Formspree → download or pending message
 ```
@@ -56,7 +56,7 @@ Click "Download for Mac"
 
 If users hit a GitHub 404 after signup, **no release has been published yet**. The site reads `download-status.json`:
 
-- `"available": false` — shows a thank-you message instead of a broken DMG link (default until first release)
+- `"available": false` — shows a high-demand waitlist message instead of a broken DMG link (default until first release)
 - `"available": true` — triggers `Clipper-latest.dmg` after signup
 
 The **Release Clipper** workflow sets `available: true` automatically when a DMG is published. See [release-setup.md](release-setup.md).
