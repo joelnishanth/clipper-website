@@ -130,6 +130,19 @@
       errorEl.hidden = false;
     };
 
+    const parseFormspreeError = async (response) => {
+      try {
+        const data = await response.json();
+        if (typeof data.error === "string") return data.error;
+        if (Array.isArray(data.errors) && data.errors.length > 0) {
+          return data.errors.map((e) => e.message || e.code).join(" ");
+        }
+      } catch {
+        /* ignore */
+      }
+      return "Something went wrong. Try again or email hello@offlyn.ai.";
+    };
+
     const submitSignup = async (email) => {
       if (!signupConfig.formEndpoint) {
         markRegistered();
@@ -144,20 +157,14 @@
         },
         body: JSON.stringify({
           email,
+          _replyto: email,
           source: "clipper-website-download",
           _subject: "Clipper download signup",
         }),
       });
 
       if (!response.ok) {
-        let detail = "Something went wrong. Try again or email hello@offlyn.ai.";
-        try {
-          const data = await response.json();
-          if (data.error) detail = data.error;
-        } catch {
-          /* use default */
-        }
-        throw new Error(detail);
+        throw new Error(await parseFormspreeError(response));
       }
 
       markRegistered();
@@ -197,12 +204,6 @@
     form.addEventListener("submit", async (event) => {
       event.preventDefault();
       if (errorEl) errorEl.hidden = true;
-
-      const honeypot = form.querySelector('input[name="_gotcha"]');
-      if (honeypot?.value) {
-        closeModal();
-        return;
-      }
 
       const email = emailInput.value.trim();
       if (!email || !emailInput.checkValidity()) {

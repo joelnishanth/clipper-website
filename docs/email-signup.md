@@ -85,10 +85,34 @@ The modal states emails are for Clipper updates only. Link to a privacy policy w
 
 ## Spam protection
 
-- Honeypot field `_gotcha` (hidden; bots fill it, humans don’t)
-- Formspree built-in spam filtering on paid tiers
-- Optional: enable Formspree reCAPTCHA in dashboard
+- Formspree built-in spam filtering
+- Do **not** enable reCAPTCHA on this form (breaks AJAX signup unless you embed their widget)
 
-## Resetting “already registered”
+## Troubleshooting
 
-Clear `localStorage` key `clipper_download_registered_v1` in DevTools to see the modal again.
+### Submissions not in Formspree dashboard
+
+1. **Activate the form** — Formspree emails a confirmation link when you create the form. Click it before expecting submissions to appear.
+2. **Disable reCAPTCHA** on this form — AJAX signup cannot complete reCAPTCHA unless you embed their widget. In Formspree → form → Settings → disable reCAPTCHA.
+3. **Check spam** in Formspree and in `hello@offlyn.ai`.
+4. **Ad blockers** — some block `formspree.io`. Test in a private window with extensions off.
+5. **Repeat visits** — after one successful signup, the modal is skipped (`localStorage` key `clipper_download_registered_v1`). Clear it in DevTools to re-test.
+
+### User sees an error in the modal
+
+Open the browser console (⌥⌘I → Console). Common causes:
+
+| Error | Fix |
+|---|---|
+| CORS / blocked by client | Disable ad blocker; if using a custom domain, submit once so Formspree allowlists it |
+| 422 validation | Invalid email format |
+| 403 / 429 | Form locked or Formspree rate limit — upgrade plan or wait |
+
+### API test (should return `"ok":true`)
+
+```bash
+curl -s -X POST "https://formspree.io/f/xlgvppoa" \
+  -H "Accept: application/json" \
+  -H "Content-Type: application/json" \
+  -d '{"email":"you@example.com","_replyto":"you@example.com","source":"clipper-website-download"}'
+```

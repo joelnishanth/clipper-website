@@ -608,7 +608,13 @@
             Enter your email to download and get occasional product updates. No spam — unsubscribe
             anytime.
           </p>
-          <form class="download-modal-form" id="download-signup-form" novalidate>
+          <form
+            class="download-modal-form"
+            id="download-signup-form"
+            action="https://formspree.io/f/xlgvppoa"
+            method="POST"
+            novalidate
+          >
             <label class="sr-only" for="signup-email">Email address</label>
             <input
               type="email"
@@ -619,7 +625,6 @@
               autocomplete="email"
               required
             />
-            <input type="text" name="_gotcha" class="download-modal-honeypot" tabindex="-1" autocomplete="off" aria-hidden="true" />
             <p class="download-modal-error" id="download-signup-error" hidden></p>
             <button type="submit" class="btn btn-primary download-modal-submit" id="download-signup-submit">
               Download for Mac
