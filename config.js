@@ -9,7 +9,7 @@ window.CLIPPER_SIGNUP = {
    * Create a free form at https://formspree.io → point notifications to hello@offlyn.ai
    * Set to null to skip API (download only — for local dev).
    */
-  formEndpoint: null,
+  formEndpoint: "https://formspree.io/f/xlgvppoa",
 
   /** localStorage key — repeat visitors skip the modal */
   storageKey: "clipper_download_registered_v1",
