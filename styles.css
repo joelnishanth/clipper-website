@@ -1796,7 +1796,7 @@ button {
   border-bottom: none;
 }
 
-.compare-table tbody td:first-of-type {
+.compare-table tbody td:nth-child(2) {
   background: linear-gradient(180deg, rgba(110, 92, 225, 0.06) 0%, rgba(110, 92, 225, 0.02) 100%);
 }
 
