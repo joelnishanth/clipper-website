@@ -2036,6 +2036,16 @@ button {
   text-underline-offset: 0.12em;
 }
 
+.download-modal-recaptcha-widget {
+  display: flex;
+  justify-content: center;
+  min-height: 4.875rem;
+}
+
+.download-modal-recaptcha-widget[hidden] {
+  display: none !important;
+}
+
 .download-modal-success {
   display: flex;
   flex-direction: column;

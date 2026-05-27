@@ -100,17 +100,23 @@ Formspree’s **default reCAPTCHA uses a redirect page** — that breaks our AJA
 | **Disable CAPTCHA** (recommended) | Fastest fix; Formspree still filters spam |
 | **Custom reCAPTCHA / Turnstile key** | Keep CAPTCHA on the modal; requires widget + keys in `config.js` |
 
-### reCAPTCHA v3 (Option B)
+### reCAPTCHA v2 (checkbox — current setup)
 
 | Key | Where |
 |---|---|
 | **Site key** (public) | `config.js` → `recaptchaSiteKey` |
 | **Secret key** (private) | Formspree → form Settings → CAPTCHA → **Custom reCAPTCHA** |
+| **Version** | `config.js` → `recaptchaVersion: 2` |
+
+The download modal shows a checkbox widget. Users must tick it before submit.
+
+If you create a **v3** key instead, set `recaptchaVersion: 3` (invisible, no checkbox).
 
 Example `config.js`:
 
 ```javascript
 recaptchaSiteKey: "6LcxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxX",
+recaptchaVersion: 2,
 ```
 
 In [Google reCAPTCHA Admin](https://www.google.com/recaptcha/admin), add domains:

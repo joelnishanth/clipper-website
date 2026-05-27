@@ -16,13 +16,68 @@
     formEndpoint: null,
     verificationApi: null,
     recaptchaSiteKey: null,
+    recaptchaVersion: 2,
     storageKey: "clipper_download_registered_v1",
     emailStorageKey: "clipper_download_email_v1",
   };
 
   let recaptchaLoadPromise = null;
+  let recaptchaWidgetId = null;
 
-  const loadRecaptcha = () => {
+  const resetRecaptcha = () => {
+    if (recaptchaWidgetId === null || !window.grecaptcha?.reset) return;
+    window.grecaptcha.reset(recaptchaWidgetId);
+  };
+
+  const loadRecaptchaV2 = () => {
+    const siteKey = signupConfig.recaptchaSiteKey;
+    const container = document.getElementById("download-recaptcha-widget");
+    if (!siteKey || !container) return Promise.resolve();
+
+    const renderWidget = () => {
+      if (recaptchaWidgetId !== null) {
+        resetRecaptcha();
+        return;
+      }
+      recaptchaWidgetId = window.grecaptcha.render(container, {
+        sitekey: siteKey,
+        theme: "light",
+      });
+    };
+
+    if (window.grecaptcha?.render) {
+      renderWidget();
+      return Promise.resolve();
+    }
+
+    if (recaptchaLoadPromise) return recaptchaLoadPromise;
+
+    recaptchaLoadPromise = new Promise((resolve, reject) => {
+      window.onClipperRecaptchaLoad = () => {
+        try {
+          renderWidget();
+          resolve();
+        } catch (error) {
+          recaptchaLoadPromise = null;
+          reject(error instanceof Error ? error : new Error("Could not load reCAPTCHA."));
+        }
+      };
+
+      const script = document.createElement("script");
+      script.src = "https://www.google.com/recaptcha/api.js?onload=onClipperRecaptchaLoad&render=explicit";
+      script.async = true;
+      script.defer = true;
+      script.onerror = () => {
+        recaptchaLoadPromise = null;
+        reject(new Error("Could not load reCAPTCHA."));
+      };
+      document.head.appendChild(script);
+    });
+
+    return recaptchaLoadPromise;
+  };
+
+  const loadRecaptchaV3 = () => {
     const siteKey = signupConfig.recaptchaSiteKey;
     if (!siteKey) return Promise.resolve();
     if (window.grecaptcha?.execute) return Promise.resolve();
@@ -43,20 +98,39 @@
     return recaptchaLoadPromise;
   };
 
+  const loadRecaptcha = () => {
+    const version = signupConfig.recaptchaVersion ?? 2;
+    return version === 3 ? loadRecaptchaV3() : loadRecaptchaV2();
+  };
+
   const getRecaptchaToken = async () => {
     const siteKey = signupConfig.recaptchaSiteKey;
     if (!siteKey) return null;
 
+    const version = signupConfig.recaptchaVersion ?? 2;
     await loadRecaptcha();
 
-    return new Promise((resolve, reject) => {
-      window.grecaptcha.ready(() => {
-        window.grecaptcha
-          .execute(siteKey, { action: "clipper_download" })
-          .then(resolve)
-          .catch(reject);
+    if (version === 3) {
+      return new Promise((resolve, reject) => {
+        window.grecaptcha.ready(() => {
+          window.grecaptcha
+            .execute(siteKey, { action: "clipper_download" })
+            .then(resolve)
+            .catch(reject);
+        });
       });
-    });
+    }
+
+    if (recaptchaWidgetId === null) {
+      throw new Error("Could not load reCAPTCHA.");
+    }
+
+    const token = window.grecaptcha.getResponse(recaptchaWidgetId);
+    if (!token) {
+      throw new Error("Complete the reCAPTCHA check below.");
+    }
+
+    return token;
   };
 
   /* ── Download + email signup ── */
@@ -81,11 +155,19 @@
     const triggers = document.querySelectorAll(".js-download");
     const verificationEnabled = Boolean(signupConfig.verificationApi);
     const recaptchaNotice = document.getElementById("download-recaptcha-notice");
+    const recaptchaWidget = document.getElementById("download-recaptcha-widget");
 
     if (!modal || !form || !emailInput || !submitBtn) return;
 
     if (recaptchaNotice) {
       recaptchaNotice.hidden = !signupConfig.recaptchaSiteKey;
+    }
+    if (recaptchaWidget) {
+      recaptchaWidget.hidden = !signupConfig.recaptchaSiteKey;
+      recaptchaWidget.setAttribute(
+        "aria-hidden",
+        signupConfig.recaptchaSiteKey ? "false" : "true"
+      );
     }
 
     if (signupConfig.recaptchaSiteKey) {
@@ -234,6 +316,7 @@
         resendBtn.disabled = false;
         resendBtn.textContent = "Resend code";
       }
+      resetRecaptcha();
       showSignupForm();
     };
 
@@ -435,6 +518,7 @@
         await completeDownloadFlow();
       } catch (error) {
         showError(error instanceof Error ? error.message : "Could not continue. Try again.");
+        resetRecaptcha();
       } finally {
         submitBtn.disabled = false;
         setSubmitLabel();
