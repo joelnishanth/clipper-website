@@ -23,45 +23,20 @@
 
   let recaptchaLoadPromise = null;
   let recaptchaWidgetId = null;
+  let recaptchaToken = "";
 
   const resetRecaptcha = () => {
+    recaptchaToken = "";
     if (recaptchaWidgetId === null || !window.grecaptcha?.reset) return;
     window.grecaptcha.reset(recaptchaWidgetId);
   };
 
-  const loadRecaptchaV2 = () => {
-    const siteKey = signupConfig.recaptchaSiteKey;
-    const container = document.getElementById("download-recaptcha-widget");
-    if (!siteKey || !container) return Promise.resolve();
-
-    const renderWidget = () => {
-      if (recaptchaWidgetId !== null) {
-        resetRecaptcha();
-        return;
-      }
-      recaptchaWidgetId = window.grecaptcha.render(container, {
-        sitekey: siteKey,
-        theme: "light",
-      });
-    };
-
-    if (window.grecaptcha?.render) {
-      renderWidget();
-      return Promise.resolve();
-    }
-
+  const loadRecaptchaScript = () => {
+    if (window.grecaptcha?.render) return Promise.resolve();
     if (recaptchaLoadPromise) return recaptchaLoadPromise;
 
     recaptchaLoadPromise = new Promise((resolve, reject) => {
-      window.onClipperRecaptchaLoad = () => {
-        try {
-          renderWidget();
-          resolve();
-        } catch (error) {
-          recaptchaLoadPromise = null;
-          reject(error instanceof Error ? error : new Error("Could not load reCAPTCHA."));
-        }
-      };
+      window.onClipperRecaptchaLoad = () => resolve();
 
       const script = document.createElement("script");
       script.src = "https://www.google.com/recaptcha/api.js?onload=onClipperRecaptchaLoad&render=explicit";
@@ -75,6 +50,29 @@
     });
 
     return recaptchaLoadPromise;
+  };
+
+  const renderRecaptchaV2 = async () => {
+    const siteKey = signupConfig.recaptchaSiteKey;
+    const container = document.getElementById("download-recaptcha-widget");
+    if (!siteKey || !container) return;
+
+    await loadRecaptchaScript();
+
+    if (recaptchaWidgetId !== null) {
+      return;
+    }
+
+    recaptchaWidgetId = window.grecaptcha.render(container, {
+      sitekey: siteKey,
+      theme: "light",
+      callback: (token) => {
+        recaptchaToken = token;
+      },
+      "expired-callback": () => {
+        recaptchaToken = "";
+      },
+    });
   };
 
   const loadRecaptchaV3 = () => {
@@ -100,7 +98,7 @@
 
   const loadRecaptcha = () => {
     const version = signupConfig.recaptchaVersion ?? 2;
-    return version === 3 ? loadRecaptchaV3() : loadRecaptchaV2();
+    return version === 3 ? loadRecaptchaV3() : renderRecaptchaV2();
   };
 
   const getRecaptchaToken = async () => {
@@ -108,9 +106,9 @@
     if (!siteKey) return null;
 
     const version = signupConfig.recaptchaVersion ?? 2;
-    await loadRecaptcha();
 
     if (version === 3) {
+      await loadRecaptchaV3();
       return new Promise((resolve, reject) => {
         window.grecaptcha.ready(() => {
           window.grecaptcha
@@ -125,7 +123,12 @@
       throw new Error("Could not load reCAPTCHA.");
     }
 
-    const token = window.grecaptcha.getResponse(recaptchaWidgetId);
+    const token =
+      recaptchaToken ||
+      window.grecaptcha.getResponse(recaptchaWidgetId) ||
+      document.querySelector("#download-recaptcha-widget textarea[name='g-recaptcha-response']")?.value ||
+      "";
+
     if (!token) {
       throw new Error("Complete the reCAPTCHA check below.");
     }
@@ -168,12 +171,6 @@
         "aria-hidden",
         signupConfig.recaptchaSiteKey ? "false" : "true"
       );
-    }
-
-    if (signupConfig.recaptchaSiteKey) {
-      loadRecaptcha().catch(() => {
-        /* surfaced on submit if still failing */
-      });
     }
 
     let downloadStatus = {
@@ -298,6 +295,15 @@
       modal.hidden = false;
       modal.setAttribute("aria-hidden", "false");
       document.body.style.overflow = "hidden";
+
+      if (signupConfig.recaptchaSiteKey) {
+        window.setTimeout(() => {
+          renderRecaptchaV2().catch(() => {
+            /* surfaced on submit if still failing */
+          });
+        }, 0);
+      }
+
       window.setTimeout(() => emailInput.focus(), 50);
     };
 
