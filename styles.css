@@ -2030,19 +2030,13 @@ button {
   text-align: center;
 }
 
-.download-modal-recaptcha a {
-  color: var(--zinc-600);
-  text-decoration: underline;
-  text-underline-offset: 0.12em;
-}
-
-.download-modal-recaptcha-widget {
+.download-modal-turnstile-widget {
   display: flex;
   justify-content: center;
-  min-height: 4.875rem;
+  min-height: 4.0625rem;
 }
 
-.download-modal-recaptcha-widget[hidden] {
+.download-modal-turnstile-widget[hidden] {
   display: none !important;
 }
 
