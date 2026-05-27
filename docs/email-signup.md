@@ -25,7 +25,7 @@ The marketing site captures email **when the user clicks any “Download for Mac
 
 ```javascript
 window.CLIPPER_SIGNUP = {
-  downloadUrl: "https://github.com/joelnishanth/clipper-website/releases/download/v1.2.0/Clipper-1.2.0.dmg",
+  downloadUrl: "https://github.com/joelnishanth/clipper-website/releases/download/v1.2.1/Clipper-1.2.1.dmg",
   formEndpoint: "https://formspree.io/f/YOUR_FORM_ID",
   verificationApi: "https://clipper-signup-api.your-account.workers.dev", // or null
   storageKey: "clipper_download_registered_v1",
@@ -64,7 +64,7 @@ See [email-verification.md](email-verification.md) for the verification step.
 If users hit a GitHub 404 after signup, **no release has been published yet**. The site reads `download-status.json`:
 
 - `"available": false` — shows a high-demand waitlist message instead of a broken DMG link (default until first release)
-- `"available": true` — triggers `Clipper-1.2.0.dmg` after signup
+- `"available": true` — triggers `Clipper-1.2.1.dmg` after signup
 
 The **Release Clipper** workflow sets `available: true` automatically when a DMG is published. See [release-setup.md](release-setup.md).
 

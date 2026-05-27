@@ -16,7 +16,7 @@ Pushes to `main` deploy automatically to GitHub Pages via Actions.
 
 Live site: https://joelnishanth.github.io/clipper-website/
 
-Download: https://github.com/joelnishanth/clipper-website/releases/download/v1.2.0/Clipper-1.2.0.dmg
+Download: https://github.com/joelnishanth/clipper-website/releases/download/v1.2.1/Clipper-1.2.1.dmg
 
 Color palette: [docs/color-scheme.md](docs/color-scheme.md)
 
