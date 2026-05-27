@@ -15,91 +15,122 @@
       "https://github.com/joelnishanth/clipper-website/releases/download/v1.2.1/Clipper-1.2.1.dmg",
     formEndpoint: null,
     verificationApi: null,
-    turnstileSiteKey: null,
+    recaptchaSiteKey: null,
+    recaptchaVersion: 2,
     storageKey: "clipper_download_registered_v1",
     emailStorageKey: "clipper_download_email_v1",
   };
 
-  let turnstileLoadPromise = null;
-  let turnstileWidgetId = null;
-  let turnstileToken = "";
+  let recaptchaLoadPromise = null;
+  let recaptchaWidgetId = null;
+  let recaptchaToken = "";
 
-  const resetTurnstile = () => {
-    turnstileToken = "";
-    if (turnstileWidgetId !== null && window.turnstile?.reset) {
-      window.turnstile.reset(turnstileWidgetId);
-    }
+  const resetRecaptcha = () => {
+    recaptchaToken = "";
+    if (recaptchaWidgetId === null || !window.grecaptcha?.reset) return;
+    window.grecaptcha.reset(recaptchaWidgetId);
   };
 
-  const loadTurnstileScript = () => {
-    if (window.turnstile?.render) return Promise.resolve();
-    if (turnstileLoadPromise) return turnstileLoadPromise;
+  const loadRecaptchaScript = () => {
+    if (window.grecaptcha?.render) return Promise.resolve();
+    if (recaptchaLoadPromise) return recaptchaLoadPromise;
 
-    turnstileLoadPromise = new Promise((resolve, reject) => {
+    recaptchaLoadPromise = new Promise((resolve, reject) => {
+      window.onClipperRecaptchaLoad = () => resolve();
+
       const script = document.createElement("script");
-      script.src = "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit";
+      script.src = "https://www.google.com/recaptcha/api.js?onload=onClipperRecaptchaLoad&render=explicit";
       script.async = true;
       script.defer = true;
-      script.onload = () => {
-        const waitForTurnstile = () => {
-          if (window.turnstile?.render) {
-            resolve();
-            return;
-          }
-          window.requestAnimationFrame(waitForTurnstile);
-        };
-        waitForTurnstile();
-      };
       script.onerror = () => {
-        turnstileLoadPromise = null;
-        reject(new Error("Could not load Turnstile."));
+        recaptchaLoadPromise = null;
+        reject(new Error("Could not load reCAPTCHA."));
       };
       document.head.appendChild(script);
     });
 
-    return turnstileLoadPromise;
+    return recaptchaLoadPromise;
   };
 
-  const renderTurnstile = async () => {
-    const siteKey = signupConfig.turnstileSiteKey;
-    const container = document.getElementById("download-turnstile-widget");
+  const renderRecaptchaV2 = async () => {
+    const siteKey = signupConfig.recaptchaSiteKey;
+    const container = document.getElementById("download-recaptcha-widget");
     if (!siteKey || !container) return;
 
-    await loadTurnstileScript();
+    await loadRecaptchaScript();
 
-    if (turnstileWidgetId !== null) {
+    if (recaptchaWidgetId !== null) {
       return;
     }
 
-    turnstileWidgetId = window.turnstile.render(container, {
+    recaptchaWidgetId = window.grecaptcha.render(container, {
       sitekey: siteKey,
       theme: "light",
       callback: (token) => {
-        turnstileToken = token;
+        recaptchaToken = token;
       },
       "expired-callback": () => {
-        turnstileToken = "";
-      },
-      "error-callback": () => {
-        turnstileToken = "";
+        recaptchaToken = "";
       },
     });
   };
 
-  const getTurnstileToken = async () => {
-    if (!signupConfig.turnstileSiteKey) return null;
+  const loadRecaptchaV3 = () => {
+    const siteKey = signupConfig.recaptchaSiteKey;
+    if (!siteKey) return Promise.resolve();
+    if (window.grecaptcha?.execute) return Promise.resolve();
+    if (recaptchaLoadPromise) return recaptchaLoadPromise;
 
-    if (turnstileWidgetId === null) {
-      throw new Error("Could not load Turnstile.");
+    recaptchaLoadPromise = new Promise((resolve, reject) => {
+      const script = document.createElement("script");
+      script.src = `https://www.google.com/recaptcha/api.js?render=${encodeURIComponent(siteKey)}`;
+      script.async = true;
+      script.onload = () => resolve();
+      script.onerror = () => {
+        recaptchaLoadPromise = null;
+        reject(new Error("Could not load reCAPTCHA."));
+      };
+      document.head.appendChild(script);
+    });
+
+    return recaptchaLoadPromise;
+  };
+
+  const loadRecaptcha = () => {
+    const version = signupConfig.recaptchaVersion ?? 2;
+    return version === 3 ? loadRecaptchaV3() : renderRecaptchaV2();
+  };
+
+  const getRecaptchaToken = async () => {
+    const siteKey = signupConfig.recaptchaSiteKey;
+    if (!siteKey) return null;
+
+    const version = signupConfig.recaptchaVersion ?? 2;
+
+    if (version === 3) {
+      await loadRecaptchaV3();
+      return new Promise((resolve, reject) => {
+        window.grecaptcha.ready(() => {
+          window.grecaptcha
+            .execute(siteKey, { action: "clipper_download" })
+            .then(resolve)
+            .catch(reject);
+        });
+      });
+    }
+
+    if (recaptchaWidgetId === null) {
+      throw new Error("Could not load reCAPTCHA.");
     }
 
     const token =
-      turnstileToken ||
-      document.querySelector("#download-turnstile-widget input[name='cf-turnstile-response']")?.value ||
+      recaptchaToken ||
+      window.grecaptcha.getResponse(recaptchaWidgetId) ||
+      document.querySelector("#download-recaptcha-widget textarea[name='g-recaptcha-response']")?.value ||
       "";
 
     if (!token) {
-      throw new Error("Complete the security check below.");
+      throw new Error("Complete the reCAPTCHA check below.");
     }
 
     return token;
@@ -126,15 +157,19 @@
     const releasesLink = document.getElementById("download-releases-link");
     const triggers = document.querySelectorAll(".js-download");
     const verificationEnabled = Boolean(signupConfig.verificationApi);
-    const turnstileWidget = document.getElementById("download-turnstile-widget");
+    const recaptchaNotice = document.getElementById("download-recaptcha-notice");
+    const recaptchaWidget = document.getElementById("download-recaptcha-widget");
 
     if (!modal || !form || !emailInput || !submitBtn) return;
 
-    if (turnstileWidget) {
-      turnstileWidget.hidden = !signupConfig.turnstileSiteKey;
-      turnstileWidget.setAttribute(
+    if (recaptchaNotice) {
+      recaptchaNotice.hidden = !signupConfig.recaptchaSiteKey;
+    }
+    if (recaptchaWidget) {
+      recaptchaWidget.hidden = !signupConfig.recaptchaSiteKey;
+      recaptchaWidget.setAttribute(
         "aria-hidden",
-        signupConfig.turnstileSiteKey ? "false" : "true"
+        signupConfig.recaptchaSiteKey ? "false" : "true"
       );
     }
 
@@ -261,9 +296,9 @@
       modal.setAttribute("aria-hidden", "false");
       document.body.style.overflow = "hidden";
 
-      if (signupConfig.turnstileSiteKey) {
+      if (signupConfig.recaptchaSiteKey) {
         window.setTimeout(() => {
-          renderTurnstile().catch(() => {
+          renderRecaptchaV2().catch(() => {
             /* surfaced on submit if still failing */
           });
         }, 0);
@@ -287,7 +322,7 @@
         resendBtn.disabled = false;
         resendBtn.textContent = "Resend code";
       }
-      resetTurnstile();
+      resetRecaptcha();
       showSignupForm();
     };
 
@@ -402,9 +437,9 @@
         _subject: "Clipper download signup",
       };
 
-      const turnstileResponse = await getTurnstileToken();
-      if (turnstileResponse) {
-        payload["cf-turnstile-response"] = turnstileResponse;
+      const recaptchaToken = await getRecaptchaToken();
+      if (recaptchaToken) {
+        payload["g-recaptcha-response"] = recaptchaToken;
       }
 
       const response = await fetch(signupConfig.formEndpoint, {
@@ -489,7 +524,7 @@
         await completeDownloadFlow();
       } catch (error) {
         showError(error instanceof Error ? error.message : "Could not continue. Try again.");
-        resetTurnstile();
+        resetRecaptcha();
       } finally {
         submitBtn.disabled = false;
         setSubmitLabel();

@@ -627,8 +627,8 @@
               required
             />
             <div
-              id="download-turnstile-widget"
-              class="download-modal-turnstile-widget"
+              id="download-recaptcha-widget"
+              class="download-modal-recaptcha-widget"
               hidden
               aria-hidden="true"
             ></div>
@@ -639,6 +639,13 @@
           </form>
           <p class="download-modal-fine">
             Your email is used for Clipper updates only. Audio and notes stay on your Mac.
+          </p>
+          <p class="download-modal-fine download-modal-recaptcha" id="download-recaptcha-notice" hidden>
+            This site is protected by reCAPTCHA and the Google
+            <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Privacy Policy</a>
+            and
+            <a href="https://policies.google.com/terms" target="_blank" rel="noopener">Terms of Service</a>
+            apply.
           </p>
         </div>
         <div id="download-verify-state" hidden>

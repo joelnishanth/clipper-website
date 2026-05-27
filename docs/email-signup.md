@@ -28,7 +28,7 @@ window.CLIPPER_SIGNUP = {
   downloadUrl: "https://github.com/joelnishanth/clipper-website/releases/download/v1.2.1/Clipper-1.2.1.dmg",
   formEndpoint: "https://formspree.io/f/YOUR_FORM_ID",
   verificationApi: "https://clipper-signup-api.your-account.workers.dev", // or null
-  turnstileSiteKey: "YOUR_TURNSTILE_SITE_KEY", // or null
+  recaptchaSiteKey: "YOUR_RECAPTCHA_V3_SITE_KEY", // or null
   storageKey: "clipper_download_registered_v1",
 };
 ```
@@ -97,29 +97,34 @@ Formspree’s **default reCAPTCHA uses a redirect page** — that breaks our AJA
 
 | Option | When to use |
 |---|---|
-| **Disable CAPTCHA** | Fastest fix; Formspree still filters spam |
-| **Cloudflare Turnstile** (current) | Widget in the modal; works with AJAX |
+| **Disable CAPTCHA** (recommended) | Fastest fix; Formspree still filters spam |
+| **Custom reCAPTCHA / Turnstile key** | Keep CAPTCHA on the modal; requires widget + keys in `config.js` |
 
-### Cloudflare Turnstile setup
-
-1. [Cloudflare Dashboard](https://dash.cloudflare.com/) → **Turnstile** → **Add site**
-   - Hostnames: `clipper.offlyn.ai`, `localhost`
-   - Widget mode: **Managed** (recommended)
-2. Copy **Site key** → `config.js` → `turnstileSiteKey`
-3. Copy **Secret key** → Formspree → form Settings → **CAPTCHA** → **Adjust settings** → **Cloudflare Turnstile**
+### reCAPTCHA v2 (checkbox — current setup)
 
 | Key | Where |
 |---|---|
-| **Site key** (public) | `config.js` → `turnstileSiteKey` |
-| **Secret key** (private) | Formspree → CAPTCHA → Cloudflare Turnstile |
+| **Site key** (public) | `config.js` → `recaptchaSiteKey` |
+| **Secret key** (private) | Formspree → form Settings → CAPTCHA → **Custom reCAPTCHA** |
+| **Version** | `config.js` → `recaptchaVersion: 2` |
+
+The download modal shows a checkbox widget. Users must tick it before submit.
+
+If you create a **v3** key instead, set `recaptchaVersion: 3` (invisible, no checkbox).
 
 Example `config.js`:
 
 ```javascript
-turnstileSiteKey: "0x4AAAAAAAxxxxxxxxxxxxxxxx",
+recaptchaSiteKey: "6LcxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxX",
+recaptchaVersion: 2,
 ```
 
-The modal renders Turnstile when it opens and sends `cf-turnstile-response` with each Formspree POST. **Do not** put the secret key in `config.js`.
+In [Google reCAPTCHA Admin](https://www.google.com/recaptcha/admin), add domains:
+
+- `clipper.offlyn.ai`
+- `localhost` (for local testing)
+
+The modal renders a v2 checkbox and sends `g-recaptcha-response` with each Formspree POST. **Do not** put the secret key in `config.js`.
 
 ### Fix: “In order to submit via AJAX…” error
 
@@ -161,7 +166,7 @@ Open the browser console (⌥⌘I → Console). Common causes:
 
 | Error | Fix |
 |---|---|
-| AJAX / custom key / reCAPTCHA | Formspree → CAPTCHA → **Cloudflare Turnstile** (or disable CAPTCHA) |
+| AJAX / custom key / reCAPTCHA | Formspree → form Settings → **disable CAPTCHA** (see [Spam protection](#spam-protection)) |
 | CORS / blocked by client | Disable ad blocker; if using a custom domain, submit once so Formspree allowlists it |
 | 422 validation | Invalid email format |
 | 403 / 429 | Form locked or Formspree rate limit — upgrade plan or wait |

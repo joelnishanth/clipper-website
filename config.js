@@ -1,4 +1,4 @@
-/** @type {Readonly<{ downloadUrl: string; formEndpoint: string | null; verificationApi: string | null; turnstileSiteKey: string | null; storageKey: string; emailStorageKey: string }>} */
+/** @type {Readonly<{ downloadUrl: string; formEndpoint: string | null; verificationApi: string | null; recaptchaSiteKey: string | null; recaptchaVersion: 2 | 3; storageKey: string; emailStorageKey: string }>} */
 window.CLIPPER_SIGNUP = {
   /** GitHub release DMG — opened after successful signup */
   downloadUrl:
@@ -19,12 +19,15 @@ window.CLIPPER_SIGNUP = {
   verificationApi: null,
 
   /**
-   * Cloudflare Turnstile site key (public — safe in the browser).
-   * Create at https://dash.cloudflare.com → Turnstile (add clipper.offlyn.ai).
-   * Paste the SECRET key in Formspree → Settings → CAPTCHA → Cloudflare Turnstile.
-   * Set to null if CAPTCHA is disabled in Formspree.
+   * Google reCAPTCHA site key (public — safe in the browser).
+   * Create at https://www.google.com/recaptcha/admin (add clipper.offlyn.ai).
+   * Paste the SECRET key in Formspree → Settings → CAPTCHA → Custom reCAPTCHA.
+   * Set recaptchaSiteKey to null if CAPTCHA is disabled in Formspree.
    */
-  turnstileSiteKey: null,
+  recaptchaSiteKey: "6LfRiP4sAAAAAF7iBFuDN11G0R4mJhF-Q4M9-D7p",
+
+  /** 2 = checkbox widget (Formspree custom v2 key). 3 = invisible score-based key. */
+  recaptchaVersion: 2,
 
   /** localStorage key — set after a successful verified signup */
   storageKey: "clipper_download_registered_v1",
