@@ -10,7 +10,7 @@ id = "REPLACE_WITH_KV_NAMESPACE_ID"
 
 [vars]
 FROM_EMAIL = "Clipper <onboarding@resend.dev>"
-ALLOWED_ORIGINS = "https://joelnishanth.github.io,http://127.0.0.1:8080,http://localhost:8080"
+ALLOWED_ORIGINS = "https://clipper.offlyn.ai,https://joelnishanth.github.io,http://127.0.0.1:8080,http://localhost:8080"
 
 # Secrets (wrangler secret put):
 # RESEND_API_KEY

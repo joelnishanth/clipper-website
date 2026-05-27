@@ -15,8 +15,48 @@
       "https://github.com/joelnishanth/clipper-website/releases/download/v1.2.1/Clipper-1.2.1.dmg",
     formEndpoint: null,
     verificationApi: null,
+    recaptchaSiteKey: null,
     storageKey: "clipper_download_registered_v1",
     emailStorageKey: "clipper_download_email_v1",
+  };
+
+  let recaptchaLoadPromise = null;
+
+  const loadRecaptcha = () => {
+    const siteKey = signupConfig.recaptchaSiteKey;
+    if (!siteKey) return Promise.resolve();
+    if (window.grecaptcha?.execute) return Promise.resolve();
+    if (recaptchaLoadPromise) return recaptchaLoadPromise;
+
+    recaptchaLoadPromise = new Promise((resolve, reject) => {
+      const script = document.createElement("script");
+      script.src = `https://www.google.com/recaptcha/api.js?render=${encodeURIComponent(siteKey)}`;
+      script.async = true;
+      script.onload = () => resolve();
+      script.onerror = () => {
+        recaptchaLoadPromise = null;
+        reject(new Error("Could not load reCAPTCHA."));
+      };
+      document.head.appendChild(script);
+    });
+
+    return recaptchaLoadPromise;
+  };
+
+  const getRecaptchaToken = async () => {
+    const siteKey = signupConfig.recaptchaSiteKey;
+    if (!siteKey) return null;
+
+    await loadRecaptcha();
+
+    return new Promise((resolve, reject) => {
+      window.grecaptcha.ready(() => {
+        window.grecaptcha
+          .execute(siteKey, { action: "clipper_download" })
+          .then(resolve)
+          .catch(reject);
+      });
+    });
   };
 
   /* ── Download + email signup ── */
@@ -40,8 +80,19 @@
     const releasesLink = document.getElementById("download-releases-link");
     const triggers = document.querySelectorAll(".js-download");
     const verificationEnabled = Boolean(signupConfig.verificationApi);
+    const recaptchaNotice = document.getElementById("download-recaptcha-notice");
 
     if (!modal || !form || !emailInput || !submitBtn) return;
+
+    if (recaptchaNotice) {
+      recaptchaNotice.hidden = !signupConfig.recaptchaSiteKey;
+    }
+
+    if (signupConfig.recaptchaSiteKey) {
+      loadRecaptcha().catch(() => {
+        /* surfaced on submit if still failing */
+      });
+    }
 
     let downloadStatus = {
       available: false,
@@ -205,7 +256,12 @@
     const parseApiError = async (response) => {
       try {
         const data = await response.json();
-        if (typeof data.error === "string") return data.error;
+        if (typeof data.error === "string") {
+          if (data.error.includes("submit via AJAX")) {
+            return `${data.error} Disable CAPTCHA under Formspree → Settings → Spam protection for form xlgvppoa.`;
+          }
+          return data.error;
+        }
         if (Array.isArray(data.errors) && data.errors.length > 0) {
           return data.errors.map((e) => e.message || e.code).join(" ");
         }
@@ -285,18 +341,25 @@
         return { ok: true, skipped: true };
       }
 
+      const payload = {
+        email,
+        _replyto: email,
+        source: "clipper-website-download",
+        _subject: "Clipper download signup",
+      };
+
+      const recaptchaToken = await getRecaptchaToken();
+      if (recaptchaToken) {
+        payload["g-recaptcha-response"] = recaptchaToken;
+      }
+
       const response = await fetch(signupConfig.formEndpoint, {
         method: "POST",
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-          email,
-          _replyto: email,
-          source: "clipper-website-download",
-          _subject: "Clipper download signup",
-        }),
+        body: JSON.stringify(payload),
       });
 
       if (!response.ok) {

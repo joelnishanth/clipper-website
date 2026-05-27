@@ -2030,6 +2030,12 @@ button {
   text-align: center;
 }
 
+.download-modal-recaptcha a {
+  color: var(--zinc-600);
+  text-decoration: underline;
+  text-underline-offset: 0.12em;
+}
+
 .download-modal-success {
   display: flex;
   flex-direction: column;

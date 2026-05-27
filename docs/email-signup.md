@@ -28,6 +28,7 @@ window.CLIPPER_SIGNUP = {
   downloadUrl: "https://github.com/joelnishanth/clipper-website/releases/download/v1.2.1/Clipper-1.2.1.dmg",
   formEndpoint: "https://formspree.io/f/YOUR_FORM_ID",
   verificationApi: "https://clipper-signup-api.your-account.workers.dev", // or null
+  recaptchaSiteKey: "YOUR_RECAPTCHA_V3_SITE_KEY", // or null
   storageKey: "clipper_download_registered_v1",
 };
 ```
@@ -92,8 +93,56 @@ The modal states emails are for Clipper updates only. Link to a privacy policy w
 
 ## Spam protection
 
-- Formspree built-in spam filtering
-- Do **not** enable reCAPTCHA on this form (breaks AJAX signup unless you embed their widget)
+Formspree’s **default reCAPTCHA uses a redirect page** — that breaks our AJAX signup. Pick one:
+
+| Option | When to use |
+|---|---|
+| **Disable CAPTCHA** (recommended) | Fastest fix; Formspree still filters spam |
+| **Custom reCAPTCHA / Turnstile key** | Keep CAPTCHA on the modal; requires widget + keys in `config.js` |
+
+### reCAPTCHA v3 (Option B)
+
+| Key | Where |
+|---|---|
+| **Site key** (public) | `config.js` → `recaptchaSiteKey` |
+| **Secret key** (private) | Formspree → form Settings → CAPTCHA → **Custom reCAPTCHA** |
+
+Example `config.js`:
+
+```javascript
+recaptchaSiteKey: "6LcxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxX",
+```
+
+In [Google reCAPTCHA Admin](https://www.google.com/recaptcha/admin), add domains:
+
+- `clipper.offlyn.ai`
+- `localhost` (for local testing)
+
+The site loads reCAPTCHA v3 invisibly on submit and sends `g-recaptcha-response` with each Formspree POST. **Do not** put the secret key in `config.js`.
+
+### Fix: “In order to submit via AJAX…” error
+
+If the modal shows:
+
+> In order to submit via AJAX, you need to set a custom key or reCAPTCHA must be disabled in this form's settings page.
+
+Do this in [Formspree](https://formspree.io):
+
+1. Open form **Clipper download** (`xlgvppoa`)
+2. Go to **Settings** → **Spam protection** / **CAPTCHA**
+3. **Turn CAPTCHA off** (toggle off), **Save**
+4. Retry download on the live site
+
+Verify with:
+
+```bash
+curl -s -X POST "https://formspree.io/f/xlgvppoa" \
+  -H "Accept: application/json" \
+  -H "Content-Type: application/json" \
+  -d '{"email":"you@example.com","source":"clipper-website-download"}'
+```
+
+Expected: `{"ok":true}` — not an `error` about AJAX/reCAPTCHA.
 
 ## Troubleshooting
 
@@ -111,6 +160,7 @@ Open the browser console (⌥⌘I → Console). Common causes:
 
 | Error | Fix |
 |---|---|
+| AJAX / custom key / reCAPTCHA | Formspree → form Settings → **disable CAPTCHA** (see [Spam protection](#spam-protection)) |
 | CORS / blocked by client | Disable ad blocker; if using a custom domain, submit once so Formspree allowlists it |
 | 422 validation | Invalid email format |
 | 403 / 429 | Form locked or Formspree rate limit — upgrade plan or wait |

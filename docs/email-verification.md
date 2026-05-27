@@ -86,7 +86,7 @@ Commit and push — GitHub Pages redeploys automatically.
 `ALLOWED_ORIGINS` in `wrangler.toml` must include your site origin:
 
 ```
-https://joelnishanth.github.io
+https://clipper.offlyn.ai
 ```
 
 Add a custom domain here if you use one later.
