@@ -49,16 +49,20 @@
       <section class="hero-wrap">
         <div class="container hero-grid hero">
           <div class="hero-copy">
-            <p class="eyebrow">Offline · Local · Mac-native</p>
-            <h1>The offline AI notepad for people in back-to-back meetings</h1>
+            <p class="eyebrow">Private · On-device AI · Mac-native</p>
+            <h1>The AI notetaker. Processed entirely on your Mac.</h1>
             <p class="hero-lead">
-              Clipper takes your raw meeting notes and makes them awesome — with transcription
-              and AI that never leaves your Mac.
+              Clipper captures audio from your Mac, transcribes locally, and turns rough notes
+              into structured follow-ups — all on device.
             </p>
             <div class="hero-actions">
               <a href="#download-app" class="btn btn-primary js-download">Download for Mac</a>
-              <a href="#how-it-works" class="btn btn-secondary">See how it works</a>
+              <a href="#how-it-works" class="btn btn-secondary">See how local processing works</a>
             </div>
+            <p class="hero-trust">
+              Local AI models run directly on your Mac — transcription, summaries, and Q&amp;A
+              without cloud upload.
+            </p>
             <div class="hero-template-tabs" role="tablist" aria-label="Meeting note templates"></div>
           </div>
           <div class="hero-visual">
@@ -271,6 +275,83 @@
         </div>
       </section>
 
+      <!-- Flow infographic -->
+      <section class="section section-flow" id="flow">
+        <div class="container">
+          <div class="section-header center">
+            <p class="section-label">Architecture</p>
+            <h2 class="section-title">Where does your meeting data go?</h2>
+          </div>
+          <div class="flow-lanes">
+            <div class="flow-lane flow-lane-local">
+              <div class="flow-lane-header">
+                <img src="assets/clipper-logo.png" alt="Clipper" class="flow-lane-logo" width="32" height="32" />
+                <h3>Clipper</h3>
+              </div>
+              <div class="flow-lane-steps">
+                <div class="flow-step">
+                  <svg class="flow-step-icon" viewBox="0 0 24 24"><path d="M12 14a3 3 0 0 0 3-3V7a3 3 0 0 0-6 0v4a3 3 0 0 0 3 3Zm5-3a1 1 0 1 1 2 0 7 7 0 0 1-6 6.92V20h2a1 1 0 1 1 0 2H9a1 1 0 1 1 0-2h2v-2.08A7 7 0 0 1 5 11a1 1 0 1 1 2 0 5 5 0 0 0 10 0Z"/></svg>
+                  <span>Record audio</span>
+                  <svg class="flow-privacy-badge" viewBox="0 0 24 24"><path d="M18 8h-1V6A5 5 0 0 0 7 6v2H6a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2Zm-6 9a2 2 0 1 1 0-4 2 2 0 0 1 0 4ZM9 8V6a3 3 0 1 1 6 0v2H9Z"/></svg>
+                </div>
+                <div class="flow-connector flow-connector-local" aria-hidden="true"></div>
+                <div class="flow-step">
+                  <svg class="flow-step-icon" viewBox="0 0 24 24"><path d="M12 2 4 5v6c0 5 3.4 9.74 8 11 4.6-1.26 8-6 8-11V5l-8-3Zm3.7 8.3-4.5 4.5a1 1 0 0 1-1.4 0L8.3 13.3a1 1 0 1 1 1.4-1.4l.8.8 3.8-3.8a1 1 0 1 1 1.4 1.4Z"/></svg>
+                  <span>Transcribe on-device</span>
+                  <svg class="flow-privacy-badge" viewBox="0 0 24 24"><path d="M18 8h-1V6A5 5 0 0 0 7 6v2H6a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2Zm-6 9a2 2 0 1 1 0-4 2 2 0 0 1 0 4ZM9 8V6a3 3 0 1 1 6 0v2H9Z"/></svg>
+                </div>
+                <div class="flow-connector flow-connector-local" aria-hidden="true"></div>
+                <div class="flow-step">
+                  <svg class="flow-step-icon" viewBox="0 0 24 24"><path d="M7 4h10l2 3v10a3 3 0 0 1-3 3H8a3 3 0 0 1-3-3V7l2-3Zm5 4a3 3 0 0 0-3 3v1H8a1 1 0 1 0 0 2h1v1a3 3 0 1 0 6 0v-1h1a1 1 0 1 0 0-2h-1v-1a3 3 0 0 0-3-3Z"/></svg>
+                  <span>AI summarizes locally</span>
+                  <svg class="flow-privacy-badge" viewBox="0 0 24 24"><path d="M18 8h-1V6A5 5 0 0 0 7 6v2H6a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2Zm-6 9a2 2 0 1 1 0-4 2 2 0 0 1 0 4ZM9 8V6a3 3 0 1 1 6 0v2H9Z"/></svg>
+                </div>
+                <div class="flow-connector flow-connector-local" aria-hidden="true"></div>
+                <div class="flow-step">
+                  <svg class="flow-step-icon" viewBox="0 0 24 24"><path d="M4 5a3 3 0 0 1 3-3h5a3 3 0 0 1 3 3v3h2a3 3 0 0 1 3 3v6a3 3 0 0 1-3 3h-5a3 3 0 0 1-3-3v-3H7a3 3 0 0 1-3-3V5Zm11 5h-4v2h4v-2Z"/></svg>
+                  <span>Search and chat stay local</span>
+                  <svg class="flow-privacy-badge" viewBox="0 0 24 24"><path d="M18 8h-1V6A5 5 0 0 0 7 6v2H6a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2Zm-6 9a2 2 0 1 1 0-4 2 2 0 0 1 0 4ZM9 8V6a3 3 0 1 1 6 0v2H9Z"/></svg>
+                </div>
+              </div>
+              <p class="flow-lane-caption">Nothing leaves your Mac. No cloud training, no employee access, no data retention policies to worry about. Your meetings are yours alone.</p>
+            </div>
+            <div class="flow-lane flow-lane-cloud">
+              <div class="flow-lane-header">
+                <svg class="flow-lane-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a7 7 0 0 1 6.95 6.11A4 4 0 0 1 18 16H7a5 5 0 0 1-.2-10A7 7 0 0 1 12 2Zm0 5a1 1 0 0 0-1 1v3a1 1 0 1 0 2 0V8a1 1 0 0 0-1-1Zm0 8a1.25 1.25 0 1 0 0 2.5A1.25 1.25 0 0 0 12 15Z"/></svg>
+                <h3>Cloud notetakers</h3>
+              </div>
+              <div class="flow-lane-steps">
+                <div class="flow-step">
+                  <svg class="flow-step-icon" viewBox="0 0 24 24"><path d="M12 14a3 3 0 0 0 3-3V7a3 3 0 0 0-6 0v4a3 3 0 0 0 3 3Zm5-3a1 1 0 1 1 2 0 7 7 0 0 1-6 6.92V20h2a1 1 0 1 1 0 2H9a1 1 0 1 1 0-2h2v-2.08A7 7 0 0 1 5 11a1 1 0 1 1 2 0 5 5 0 0 0 10 0Z"/></svg>
+                  <span>Record audio</span>
+                </div>
+                <div class="flow-connector" aria-hidden="true"></div>
+                <div class="flow-step">
+                  <svg class="flow-step-icon" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 1 6.95 6.11A4 4 0 0 1 18 16H7a5 5 0 0 1-.2-10A7 7 0 0 1 12 2Z"/></svg>
+                  <span>Upload to cloud servers</span>
+                </div>
+                <div class="flow-connector" aria-hidden="true"></div>
+                <div class="flow-step">
+                  <svg class="flow-step-icon" viewBox="0 0 24 24"><path d="M7 4h10l2 3v10a3 3 0 0 1-3 3H8a3 3 0 0 1-3-3V7l2-3Zm5 4a3 3 0 0 0-3 3v1H8a1 1 0 1 0 0 2h1v1a3 3 0 1 0 6 0v-1h1a1 1 0 1 0 0-2h-1v-1a3 3 0 0 0-3-3Z"/></svg>
+                  <span>AI runs on their servers</span>
+                </div>
+                <div class="flow-connector" aria-hidden="true"></div>
+                <div class="flow-step">
+                  <svg class="flow-step-icon" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 1 6.95 6.11A4 4 0 0 1 18 16H7a5 5 0 0 1-.2-10A7 7 0 0 1 12 2Z"/></svg>
+                  <span>Data stored in vendor systems</span>
+                </div>
+                <div class="flow-connector" aria-hidden="true"></div>
+                <div class="flow-step flow-step-danger">
+                  <svg class="flow-step-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2Zm-1 15v-2h2v2h-2Zm0-4V7h2v6h-2Z"/></svg>
+                  <span>Your conversations used to train models &amp; visible to vendor employees</span>
+                </div>
+              </div>
+              <p class="flow-lane-caption">Your audio and transcripts leave your device. Vendors can access sensitive meeting content, use it to improve their models, and retain it indefinitely on their infrastructure.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <!-- Compare -->
       <section class="section section-compare" id="compare">
         <div class="container">
@@ -429,8 +510,8 @@
               <p class="section-label">Local AI</p>
               <h2 class="section-title">Put your meetings to work — on your Mac</h2>
               <p class="section-subtitle">
-                Local AI models built into Clipper help you finish post-meeting action items
-                without sending data to the cloud.
+                Local AI models built into Clipper help you finish post-meeting action items.
+                Inference runs on-device, so transcripts and notes stay on your Mac.
               </p>
             </div>
             <div class="prompt-grid">
@@ -522,6 +603,40 @@
               <div class="stat-label">Cloud uploads</div>
             </div>
           </div>
+        </div>
+        <div class="container privacy-detail-grid">
+          <article class="privacy-detail-card">
+            <h3>On-device processing only</h3>
+            <ul class="privacy-checks">
+              <li>Transcription runs locally on your Mac</li>
+              <li>Summaries and action items are generated on-device</li>
+              <li>No server-side transcript pipeline</li>
+            </ul>
+          </article>
+          <article class="privacy-detail-card">
+            <h3>No meeting bots, no hidden listeners</h3>
+            <ul class="privacy-checks">
+              <li>Clipper never joins as a participant</li>
+              <li>You decide when recording starts and stops</li>
+              <li>Works with Zoom, Meet, and Teams from your Mac audio</li>
+            </ul>
+          </article>
+          <article class="privacy-detail-card">
+            <h3>Your data, your control</h3>
+            <ul class="privacy-checks">
+              <li>No model training on your notes or calls</li>
+              <li>Export and share only when you choose</li>
+              <li>Retention settings are local and configurable</li>
+            </ul>
+          </article>
+          <article class="privacy-detail-card">
+            <h3>Offline-capable workflow</h3>
+            <ul class="privacy-checks">
+              <li>Core capture and note workflows run without internet</li>
+              <li>Search and chat work against local data</li>
+              <li>Built for privacy-sensitive teams and environments</li>
+            </ul>
+          </article>
         </div>
       </section>
 
