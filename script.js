@@ -357,7 +357,7 @@
       } catch {
         /* ignore */
       }
-      return "Something went wrong. Try again or email hello@offlyn.ai.";
+      return "Something went wrong. Try again or email hi@offlyn.ai.";
     };
 
     const verificationApiUrl = (path) => {

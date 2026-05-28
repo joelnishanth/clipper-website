@@ -1,0 +1,608 @@
+/* Setup guide — article layout and reusable components */
+
+.guide-page main {
+  padding-bottom: 4rem;
+}
+
+/* ── Hero ── */
+.guide-hero {
+  padding: 3rem 0 2.5rem;
+  border-bottom: 1px solid var(--zinc-200);
+  background: var(--zinc-50);
+}
+
+.guide-hero-inner {
+  max-width: 48rem;
+}
+
+.guide-eyebrow {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--brand);
+  margin-bottom: 0.75rem;
+}
+
+.guide-hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 2.75rem);
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  margin-bottom: 1rem;
+}
+
+.guide-lead {
+  font-size: 1.125rem;
+  line-height: 1.55;
+  color: var(--text-body);
+  max-width: 42rem;
+}
+
+.guide-lead a {
+  color: var(--brand);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.guide-lead a:hover {
+  color: var(--brand-dark);
+}
+
+/* ── Layout: TOC + article ── */
+.guide-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+  padding: 2.5rem 0;
+}
+
+@media (min-width: 960px) {
+  .guide-layout {
+    grid-template-columns: 220px minmax(0, 1fr);
+    gap: 3.5rem;
+    align-items: start;
+  }
+}
+
+.guide-toc {
+  display: none;
+}
+
+@media (min-width: 960px) {
+  .guide-toc {
+    display: block;
+    position: sticky;
+    top: 7rem;
+    max-height: calc(100vh - 8rem);
+    overflow-y: auto;
+  }
+}
+
+.guide-toc-title {
+  font-family: var(--font-display);
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 0.75rem;
+}
+
+.guide-toc nav ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.guide-toc nav li {
+  margin-bottom: 0.35rem;
+}
+
+.guide-toc nav a {
+  display: block;
+  font-size: 0.875rem;
+  line-height: 1.4;
+  color: var(--zinc-600);
+  padding: 0.25rem 0;
+  border-left: 2px solid transparent;
+  padding-left: 0.75rem;
+  transition: color 0.15s, border-color 0.15s;
+}
+
+.guide-toc nav a:hover {
+  color: var(--brand);
+}
+
+.guide-toc nav a.is-active {
+  color: var(--brand);
+  border-left-color: var(--brand);
+  font-weight: 500;
+}
+
+.guide-toc-mobile {
+  display: block;
+  margin-bottom: 1.5rem;
+  padding: 1rem 1.25rem;
+  background: var(--zinc-100);
+  border-radius: 0.5rem;
+  border: 1px solid var(--zinc-200);
+}
+
+@media (min-width: 960px) {
+  .guide-toc-mobile {
+    display: none;
+  }
+}
+
+.guide-toc-mobile label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--zinc-600);
+  margin-bottom: 0.5rem;
+}
+
+.guide-toc-mobile select {
+  width: 100%;
+  font: inherit;
+  font-size: 0.9375rem;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--zinc-300);
+  border-radius: 0.375rem;
+  background: #fff;
+  color: var(--text-primary);
+}
+
+/* ── Article prose ── */
+.guide-article {
+  max-width: 42rem;
+}
+
+.guide-section {
+  margin-bottom: 3rem;
+  scroll-margin-top: 6rem;
+}
+
+.guide-section h2 {
+  font-family: var(--font-display);
+  font-size: 1.625rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+  margin-bottom: 1rem;
+  padding-top: 0.5rem;
+}
+
+.guide-section h3 {
+  font-family: var(--font-display);
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 1.75rem 0 0.75rem;
+}
+
+.guide-section p {
+  font-size: 1rem;
+  line-height: 1.65;
+  color: var(--text-body);
+  margin-bottom: 1rem;
+}
+
+.guide-section p:last-child {
+  margin-bottom: 0;
+}
+
+.guide-section ul,
+.guide-section ol {
+  margin: 0 0 1rem 1.25rem;
+  line-height: 1.65;
+  color: var(--text-body);
+}
+
+.guide-section li {
+  margin-bottom: 0.35rem;
+}
+
+.guide-section a {
+  color: var(--brand);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.guide-section a:hover {
+  color: var(--brand-dark);
+}
+
+.guide-section strong {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+/* ── Requirements box ── */
+.guide-requirements {
+  background: var(--zinc-100);
+  border: 1px solid var(--zinc-200);
+  border-radius: 0.5rem;
+  padding: 1.25rem 1.5rem;
+  margin: 1.25rem 0 1.5rem;
+}
+
+.guide-requirements h3 {
+  font-family: var(--font-display);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 0 0.75rem;
+}
+
+.guide-requirements ul {
+  margin: 0;
+  padding-left: 1.125rem;
+  list-style: disc;
+}
+
+.guide-requirements li {
+  font-size: 0.9375rem;
+  line-height: 1.55;
+  margin-bottom: 0.35rem;
+}
+
+/* ── Numbered steps ── */
+.guide-steps {
+  list-style: none;
+  margin: 1.25rem 0 1.5rem;
+  padding: 0;
+  counter-reset: guide-step;
+}
+
+.guide-steps > li {
+  position: relative;
+  padding-left: 2.75rem;
+  margin-bottom: 1.25rem;
+  counter-increment: guide-step;
+}
+
+.guide-steps > li::before {
+  content: counter(guide-step);
+  position: absolute;
+  left: 0;
+  top: 0.1rem;
+  width: 1.75rem;
+  height: 1.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #fff;
+  background: var(--brand);
+  border-radius: 50%;
+}
+
+.guide-steps > li p {
+  margin-bottom: 0.35rem;
+}
+
+.guide-steps > li p:last-child {
+  margin-bottom: 0;
+}
+
+/* ── Callouts ── */
+.guide-callout {
+  border-left: 4px solid var(--brand);
+  background: rgba(110, 92, 225, 0.06);
+  border-radius: 0 0.375rem 0.375rem 0;
+  padding: 1rem 1.25rem;
+  margin: 1.25rem 0 1.5rem;
+}
+
+.guide-callout--tip {
+  border-left-color: var(--brand-light);
+}
+
+.guide-callout--warn {
+  border-left-color: #d97706;
+  background: rgba(217, 119, 6, 0.06);
+}
+
+.guide-callout-title {
+  font-family: var(--font-display);
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 0.35rem;
+}
+
+.guide-callout p {
+  font-size: 0.9375rem;
+  line-height: 1.55;
+  margin: 0;
+}
+
+/* ── Onboarding table ── */
+.guide-table-wrap {
+  overflow-x: auto;
+  margin: 1.25rem 0 1.5rem;
+  border: 1px solid var(--zinc-200);
+  border-radius: 0.5rem;
+}
+
+.guide-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9375rem;
+}
+
+.guide-table th,
+.guide-table td {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  border-bottom: 1px solid var(--zinc-200);
+  vertical-align: top;
+}
+
+.guide-table th {
+  background: var(--zinc-100);
+  font-family: var(--font-display);
+  font-weight: 600;
+  color: var(--text-primary);
+  font-size: 0.8125rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.guide-table tr:last-child td {
+  border-bottom: none;
+}
+
+.guide-table td:first-child {
+  font-weight: 600;
+  color: var(--text-primary);
+  white-space: nowrap;
+}
+
+/* ── Permission rows ── */
+.guide-permissions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin: 1.25rem 0 1.5rem;
+}
+
+.guide-permission {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.25rem;
+  padding: 1rem 1.25rem;
+  background: #fff;
+  border: 1px solid var(--zinc-200);
+  border-radius: 0.5rem;
+}
+
+@media (min-width: 640px) {
+  .guide-permission {
+    grid-template-columns: 8rem 1fr;
+    gap: 1rem;
+    align-items: start;
+  }
+}
+
+.guide-permission-label {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.9375rem;
+  color: var(--text-primary);
+}
+
+.guide-permission-desc {
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  color: var(--text-body);
+  margin: 0;
+}
+
+.guide-permission-path {
+  font-size: 0.8125rem;
+  color: var(--zinc-600);
+  margin-top: 0.35rem;
+}
+
+.guide-permission-path code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.8125rem;
+  background: var(--zinc-100);
+  padding: 0.1rem 0.35rem;
+  border-radius: 0.25rem;
+}
+
+/* ── Screenshot placeholders ── */
+.guide-screenshot {
+  margin: 1.5rem 0;
+}
+
+.guide-screenshot-slot {
+  aspect-ratio: 16 / 10;
+  background: var(--zinc-100);
+  border: 2px dashed var(--zinc-300);
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  text-align: center;
+  overflow: hidden;
+}
+
+.guide-screenshot-slot:has(img) {
+  border: 1px solid var(--zinc-200);
+  background: #fff;
+  padding: 0;
+}
+
+.guide-screenshot-slot img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 0.375rem;
+}
+
+.guide-screenshot--compact .guide-screenshot-slot {
+  aspect-ratio: auto;
+  min-height: 0;
+  padding: 1rem 1.25rem;
+}
+
+.guide-screenshot--compact .guide-screenshot-slot img {
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  margin: 0 auto;
+}
+
+.guide-screenshot-label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--zinc-600);
+  line-height: 1.4;
+}
+
+.guide-screenshot figcaption {
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--zinc-600);
+  margin-top: 0.625rem;
+  text-align: center;
+}
+
+/* ── Keyboard shortcuts ── */
+.guide-shortcuts {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.5rem;
+  margin: 1rem 0 1.5rem;
+}
+
+@media (min-width: 480px) {
+  .guide-shortcuts {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.guide-shortcut {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.625rem 0.875rem;
+  background: var(--zinc-100);
+  border-radius: 0.375rem;
+  font-size: 0.9375rem;
+}
+
+.guide-shortcut kbd {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.8125rem;
+  padding: 0.2rem 0.45rem;
+  background: #fff;
+  border: 1px solid var(--zinc-300);
+  border-radius: 0.25rem;
+  box-shadow: 0 1px 0 var(--zinc-200);
+  white-space: nowrap;
+}
+
+/* ── Troubleshooting accordions ── */
+.guide-troubleshoot {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.guide-troubleshoot details {
+  border: 1px solid var(--zinc-200);
+  border-radius: 0.5rem;
+  background: #fff;
+  overflow: hidden;
+}
+
+.guide-troubleshoot summary {
+  padding: 0.875rem 1.125rem;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.9375rem;
+  color: var(--text-primary);
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.guide-troubleshoot summary::-webkit-details-marker {
+  display: none;
+}
+
+.guide-troubleshoot summary::after {
+  content: "+";
+  font-size: 1.125rem;
+  font-weight: 400;
+  color: var(--zinc-600);
+}
+
+.guide-troubleshoot details[open] summary::after {
+  content: "−";
+}
+
+.guide-troubleshoot details[open] summary {
+  border-bottom: 1px solid var(--zinc-200);
+}
+
+.guide-troubleshoot .guide-troubleshoot-body {
+  padding: 1rem 1.125rem 1.125rem;
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: var(--text-body);
+}
+
+.guide-troubleshoot .guide-troubleshoot-body p {
+  margin: 0 0 0.75rem;
+  font-size: inherit;
+}
+
+.guide-troubleshoot .guide-troubleshoot-body p:last-child {
+  margin-bottom: 0;
+}
+
+/* ── Completion banner ── */
+.guide-complete {
+  text-align: center;
+  padding: 2rem 1.5rem;
+  background: linear-gradient(135deg, rgba(110, 92, 225, 0.08), rgba(110, 92, 225, 0.02));
+  border: 1px solid rgba(110, 92, 225, 0.2);
+  border-radius: 0.75rem;
+  margin-top: 1rem;
+}
+
+.guide-complete h3 {
+  font-family: var(--font-display);
+  font-size: 1.375rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0 0 0.75rem;
+}
+
+.guide-complete p {
+  font-size: 1rem;
+  line-height: 1.55;
+  margin-bottom: 1.25rem;
+}
+
+.guide-complete .btn {
+  display: inline-flex;
+}

@@ -1,0 +1,759 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://use.typekit.net" crossorigin />
+    <link rel="icon" type="image/png" href="assets/clipper-logo.png" />
+    <link rel="stylesheet" href="fonts.css" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="guide.css" />
+    <title>Setup guide — Clipper</title>
+    <meta
+      name="description"
+      content="Install and set up Clipper on macOS. Download on-device AI models, grant permissions, connect your calendar, and capture your first meeting — all locally on your Mac."
+    />
+    <link rel="canonical" href="https://clipper.offlyn.ai/setup.html" />
+  </head>
+  <body class="guide-page">
+    <header class="site-header">
+      <div class="container header-inner">
+        <a href="/" class="logo">
+          <img src="assets/clipper-logo.png" alt="Clipper" width="40" height="40" />
+          <span class="logo-text">
+            <span class="logo-name">Clipper</span>
+            <span class="logo-byline">by Offlyn.ai</span>
+          </span>
+        </a>
+        <nav class="nav-desktop">
+          <a href="/#how-it-works">How it works</a>
+          <a href="/#features">Features</a>
+          <a href="/#compare">Compare</a>
+          <a href="/#privacy">Privacy</a>
+          <a href="/setup.html" class="active">Setup guide</a>
+          <a href="#download-app" class="nav-cta js-download">Download for Mac</a>
+        </nav>
+        <button class="menu-toggle" aria-label="Open menu" type="button">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+      <nav class="nav-mobile container">
+        <a href="/#how-it-works">How it works</a>
+        <a href="/#features">Features</a>
+        <a href="/#compare">Compare</a>
+        <a href="/#privacy">Privacy</a>
+        <a href="/setup.html">Setup guide</a>
+        <a href="#download-app" class="js-download">Download for Mac</a>
+      </nav>
+    </header>
+
+    <main>
+      <header class="guide-hero">
+        <div class="container guide-hero-inner">
+          <p class="guide-eyebrow">Getting started</p>
+          <h1>Setup guide</h1>
+          <p class="guide-lead">
+            Install Clipper on your Mac, download on-device AI models, grant permissions, and
+            capture your first meeting — all without signing in or sending data to the cloud.
+            For a product overview, see
+            <a href="/#how-it-works">How it works</a>.
+          </p>
+        </div>
+      </header>
+
+      <div class="container guide-layout">
+        <aside class="guide-toc" aria-label="On this page">
+          <p class="guide-toc-title">On this page</p>
+          <nav>
+            <ol>
+              <li><a href="#platform">Platform availability</a></li>
+              <li><a href="#requirements">System requirements</a></li>
+              <li><a href="#install">Installing Clipper</a></li>
+              <li><a href="#launch">Launching Clipper</a></li>
+              <li><a href="#onboarding">First-launch onboarding</a></li>
+              <li><a href="#permissions">Permissions</a></li>
+              <li><a href="#calendar">Connect your calendar</a></li>
+              <li><a href="#first-capture">Test your first capture</a></li>
+              <li><a href="#all-set">You're all set</a></li>
+              <li><a href="#troubleshooting">Troubleshooting</a></li>
+            </ol>
+          </nav>
+        </aside>
+
+        <article class="guide-article">
+          <div class="guide-toc-mobile">
+            <label for="guide-toc-select">Jump to section</label>
+            <select id="guide-toc-select" aria-label="Jump to section">
+              <option value="#platform">Platform availability</option>
+              <option value="#requirements">System requirements</option>
+              <option value="#install">Installing Clipper</option>
+              <option value="#launch">Launching Clipper</option>
+              <option value="#onboarding">First-launch onboarding</option>
+              <option value="#permissions">Permissions</option>
+              <option value="#calendar">Connect your calendar</option>
+              <option value="#first-capture">Test your first capture</option>
+              <option value="#all-set">You're all set</option>
+              <option value="#troubleshooting">Troubleshooting</option>
+            </select>
+          </div>
+
+          <section class="guide-section" id="platform">
+            <h2>Platform availability</h2>
+            <p>
+              Clipper runs on <strong>macOS 26.0 or later</strong> on Apple Silicon Macs. There is
+              no Windows or iOS app, and no Google or Microsoft sign-in — everything stays on your
+              Mac.
+            </p>
+            <p>Clipper can transcribe and summarize:</p>
+            <ul>
+              <li>
+                Meetings on any software — Zoom, Google Meet, Microsoft Teams, and others
+              </li>
+              <li>In-person conversations via your microphone</li>
+              <li>Voice memos and quick notes</li>
+              <li>Audio from URLs you import (YouTube, web pages)</li>
+            </ul>
+            <p>
+              Unlike cloud notetakers, Clipper does not join your calls as a bot. It captures audio
+              from your Mac and processes it entirely on-device.
+            </p>
+          </section>
+
+          <section class="guide-section" id="requirements">
+            <h2>System requirements</h2>
+            <div class="guide-requirements">
+              <h3>Before you install</h3>
+              <ul>
+                <li><strong>macOS 26.0+</strong> on an Apple Silicon Mac</li>
+                <li><strong>8 GB RAM minimum</strong>; 16 GB or more recommended for larger AI models</li>
+                <li><strong>~3–9 GB free disk space</strong> for on-device models (exact size shown during onboarding)</li>
+                <li><strong>Internet connection</strong> for the one-time model download; processing stays local after that</li>
+              </ul>
+            </div>
+          </section>
+
+          <section class="guide-section" id="install">
+            <h2>Installing Clipper</h2>
+            <ol class="guide-steps">
+              <li>
+                <p>
+                  Click <strong>Download for Mac</strong> on this site. Enter your email to verify
+                  and download the latest <code>Clipper-{version}.dmg</code> from GitHub Releases.
+                </p>
+              </li>
+              <li>
+                <p>Open the DMG file from your Downloads folder.</p>
+              </li>
+              <li>
+                <p>Drag the <strong>Clipper</strong> icon into your <strong>Applications</strong> folder.</p>
+              </li>
+            </ol>
+            <figure class="guide-screenshot" data-screenshot="install-dmg">
+              <div class="guide-screenshot-slot">
+                <img
+                  src="assets/setup/install-dmg.png"
+                  alt="Clipper DMG installer with drag to Applications"
+                  width="600"
+                  height="340"
+                />
+              </div>
+              <figcaption>Drag Clipper into Applications to install.</figcaption>
+            </figure>
+          </section>
+
+          <section class="guide-section" id="launch">
+            <h2>Launching Clipper</h2>
+            <p>
+              Open Clipper from your Applications folder, Launchpad, or Spotlight.
+            </p>
+            <p>
+              On first launch, macOS may show a warning that Clipper is from the internet. This is
+              expected for direct downloads — click <strong>Open</strong> to continue. Clipper is
+              signed with a Developer ID certificate and notarized by Apple.
+            </p>
+            <p>
+              The first time you launch Clipper, an onboarding sheet walks you through setup. This
+              is a one-time experience.
+            </p>
+          </section>
+
+          <section class="guide-section" id="onboarding">
+            <h2>First-launch onboarding</h2>
+            <p>
+              Clipper guides you through six steps. Use <strong>Back</strong> and
+              <strong>Continue</strong> to move between them.
+            </p>
+            <div class="guide-table-wrap">
+              <table class="guide-table">
+                <thead>
+                  <tr>
+                    <th>Step</th>
+                    <th>Title</th>
+                    <th>What it covers</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>1</td>
+                    <td>Your private work brain</td>
+                    <td>Meetings, voice notes, and web research — all stored locally on your Mac</td>
+                  </tr>
+                  <tr>
+                    <td>2</td>
+                    <td>Capture without effort</td>
+                    <td>Automatic meeting detection; recording always requires your consent</td>
+                  </tr>
+                  <tr>
+                    <td>3</td>
+                    <td>Privacy by design</td>
+                    <td>On-device AI; microphone access needed for capture</td>
+                  </tr>
+                  <tr>
+                    <td>4</td>
+                    <td>Download AI models</td>
+                    <td>Transcription, summarization, and search models — see below</td>
+                  </tr>
+                  <tr>
+                    <td>5</td>
+                    <td>Permissions</td>
+                    <td>Microphone, Screen Recording, Notifications, Accessibility — see <a href="#permissions">Permissions</a></td>
+                  </tr>
+                  <tr>
+                    <td>6</td>
+                    <td>Ready to go</td>
+                    <td>Click <strong>Get Started</strong> to open the main app</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <h3>Download AI models</h3>
+            <p>
+              Clipper runs local models for transcription, summarization, live captions, and
+              semantic search. During step 4, you can tap <strong>Download All</strong> or choose
+              <strong>Download Later</strong> — models load automatically the first time you need
+              them (via <strong>Settings → Models</strong>).
+            </p>
+            <p>Models include:</p>
+            <ul>
+              <li><strong>Gemma</strong> — summarization and AI chat</li>
+              <li><strong>Whisper or GLM-ASR</strong> — batch transcription after meetings</li>
+              <li><strong>Whisper Tiny</strong> — live transcription fallback</li>
+              <li><strong>BGE</strong> — embeddings for search</li>
+            </ul>
+            <p>
+              Which variant you get depends on your Mac's RAM. Onboarding shows the exact download
+              size before you start.
+            </p>
+          </section>
+
+          <section class="guide-section" id="permissions">
+            <h2>Permissions</h2>
+            <p>
+              On step 5, Clipper asks for the permissions it needs to detect meetings, capture
+              audio, and alert you. You can grant them now or later in System Settings.
+            </p>
+
+            <div class="guide-permissions">
+              <div class="guide-permission">
+                <div class="guide-permission-label">Microphone</div>
+                <div>
+                  <p class="guide-permission-desc">
+                    Records your voice during meetings and voice notes.
+                  </p>
+                  <p class="guide-permission-path">
+                    Review in <code>System Settings → Privacy &amp; Security → Microphone</code>
+                  </p>
+                </div>
+              </div>
+              <div class="guide-permission">
+                <div class="guide-permission-label">Screen Recording</div>
+                <div>
+                  <p class="guide-permission-desc">
+                    Captures app audio from Zoom, Meet, and Teams — including when your Mac is
+                    muted. Audio only; no screen video is saved.
+                  </p>
+                  <p class="guide-permission-path">
+                    Review in <code>System Settings → Privacy &amp; Security → Screen Recording</code>
+                  </p>
+                </div>
+              </div>
+              <div class="guide-permission">
+                <div class="guide-permission-label">Notifications</div>
+                <div>
+                  <p class="guide-permission-desc">
+                    Alerts you when Clipper detects a meeting and prompts you to start recording.
+                  </p>
+                  <p class="guide-permission-path">
+                    Review in <code>System Settings → Notifications → Clipper</code>
+                  </p>
+                </div>
+              </div>
+              <div class="guide-permission">
+                <div class="guide-permission-label">Accessibility</div>
+                <div>
+                  <p class="guide-permission-desc">
+                    Improves meeting detection by reading window titles. Available in direct
+                    download builds.
+                  </p>
+                  <p class="guide-permission-path">
+                    Review in <code>System Settings → Privacy &amp; Security → Accessibility</code>
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="guide-callout guide-callout--tip">
+              <p class="guide-callout-title">Tip</p>
+              <p>
+                Screen Recording captures <strong>audio only</strong>. Clipper never saves screen
+                video from your calls.
+              </p>
+            </div>
+
+            <div class="guide-callout">
+              <p class="guide-callout-title">Speech Recognition</p>
+              <p>
+                Speech Recognition is not shown in onboarding. macOS prompts you the first time you
+                start a recording or voice note. Allow it for live transcription.
+              </p>
+            </div>
+          </section>
+
+          <section class="guide-section" id="calendar">
+            <h2>Connect your calendar</h2>
+            <p>
+              Calendar access is not part of onboarding, but connecting your calendar unlocks
+              upcoming meetings on Home and improves meeting detection.
+            </p>
+            <ol class="guide-steps">
+              <li>
+                <p>Open <strong>Settings</strong> (<kbd>⌘,</kbd>) → <strong>Connectors</strong>.</p>
+              </li>
+              <li>
+                <p>Grant calendar access when prompted.</p>
+              </li>
+              <li>
+                <p>
+                  If needed, add Google, iCloud, or Exchange accounts via
+                  <strong>System Settings → Internet Accounts</strong>.
+                </p>
+              </li>
+              <li>
+                <p>Enable the calendars you want Clipper to read. Data stays on your Mac.</p>
+              </li>
+            </ol>
+            <figure class="guide-screenshot" data-screenshot="settings-connectors">
+              <div class="guide-screenshot-slot">
+                <img
+                  src="assets/setup/settings-connectors.png"
+                  alt="Clipper Settings Connectors tab with calendar accounts"
+                  width="1200"
+                  height="750"
+                />
+              </div>
+              <figcaption>Connect calendars for upcoming meetings and detection signals.</figcaption>
+            </figure>
+          </section>
+
+          <section class="guide-section" id="first-capture">
+            <h2>Test your first capture</h2>
+            <p>
+              Clipper does not include a demo meeting — pick any flow below to see how local
+              capture works.
+            </p>
+
+            <h3>Option A — Quick note</h3>
+            <ol class="guide-steps">
+              <li>
+                <p>From Home, click <strong>Quick note</strong> in the toolbar — or press <kbd>⌘N</kbd>.</p>
+              </li>
+              <li>
+                <p>Record a voice memo or jot down a few bullets. Clipper transcribes and saves everything on your Mac.</p>
+              </li>
+              <li>
+                <p>When you're done, stop recording. Your note appears in Home under Recent.</p>
+              </li>
+            </ol>
+            <figure class="guide-screenshot guide-screenshot--compact" data-screenshot="quick-note-toolbar">
+              <div class="guide-screenshot-slot">
+                <img
+                  src="assets/setup/quick-note-toolbar.png"
+                  alt="Clipper Home toolbar with link icon and Quick note button"
+                  width="280"
+                  height="40"
+                />
+              </div>
+              <figcaption>The link icon imports URLs; Quick note starts a voice memo or scratch pad.</figcaption>
+            </figure>
+
+            <h3>Option B — Import from URL</h3>
+            <ol class="guide-steps">
+              <li>
+                <p>On Home, click the <strong>link icon</strong> in the toolbar to open Import from URL.</p>
+              </li>
+              <li>
+                <p>Paste a YouTube video or website URL, then press the import button.</p>
+              </li>
+              <li>
+                <p>Clipper fetches the content, transcribes audio locally, and creates a searchable note.</p>
+              </li>
+            </ol>
+            <figure class="guide-screenshot" data-screenshot="url-import">
+              <div class="guide-screenshot-slot">
+                <img
+                  src="assets/setup/url-import.png"
+                  alt="Clipper Import from URL sheet with YouTube or website URL field"
+                  width="520"
+                  height="200"
+                />
+              </div>
+              <figcaption>Paste a YouTube or web page link — processing stays on your Mac.</figcaption>
+            </figure>
+
+            <h3>Option C — Record a meeting</h3>
+            <ol class="guide-steps">
+              <li>
+                <p>Join or start a Zoom, Meet, or Teams call — or wait for Clipper's detection banner.</p>
+              </li>
+              <li>
+                <p>Tap <strong>Take Notes</strong> when the detection banner appears. Recording never starts without your consent.</p>
+              </li>
+              <li>
+                <p>Jot rough notes during the call. Clipper enhances them with the local transcript when the meeting ends.</p>
+              </li>
+            </ol>
+            <figure class="guide-screenshot guide-screenshot--compact" data-screenshot="meeting-banner">
+              <div class="guide-screenshot-slot">
+                <img
+                  src="assets/setup/meeting-banner.png"
+                  alt="Clipper meeting detected notification with Take Notes button"
+                  width="480"
+                  height="80"
+                />
+              </div>
+              <figcaption>Clipper detects meetings in Zoom, Meet, Teams, and your browser.</figcaption>
+            </figure>
+            <figure class="guide-screenshot guide-screenshot--compact" data-screenshot="recording-active">
+              <div class="guide-screenshot-slot">
+                <img
+                  src="assets/setup/recording-active.png"
+                  alt="Clipper recording pill with waveform and Ask anything field"
+                  width="520"
+                  height="60"
+                />
+              </div>
+              <figcaption>While recording, use the floating pill to stop capture or ask Clipper a question.</figcaption>
+            </figure>
+            <figure class="guide-screenshot guide-screenshot--compact" data-screenshot="notes-enhancing">
+              <div class="guide-screenshot-slot">
+                <img
+                  src="assets/setup/notes-enhancing.png"
+                  alt="Clipper notes view showing Enhancing status badge"
+                  width="320"
+                  height="40"
+                />
+              </div>
+              <figcaption>After the meeting, Clipper enhances your notes on-device — watch for the Enhancing badge.</figcaption>
+            </figure>
+          </section>
+
+          <section class="guide-section" id="all-set">
+            <h2>You're all set</h2>
+            <p>
+              Clipper should now show your Home view with recent notes, Ask Clipper chat, and
+              upcoming meetings if your calendar is connected.
+            </p>
+            <figure class="guide-screenshot" data-screenshot="home-view">
+              <div class="guide-screenshot-slot">
+                <img
+                  src="assets/setup/home-view.png"
+                  alt="Clipper Home view with Coming up calendar section"
+                  width="800"
+                  height="500"
+                />
+              </div>
+              <figcaption>Home shows upcoming meetings and recent notes once your calendar is connected.</figcaption>
+            </figure>
+
+            <h3>Keyboard shortcuts</h3>
+            <div class="guide-shortcuts">
+              <div class="guide-shortcut">
+                <span>Quick Note</span>
+                <kbd>⌘N</kbd>
+              </div>
+              <div class="guide-shortcut">
+                <span>Search</span>
+                <kbd>⌘K</kbd>
+              </div>
+              <div class="guide-shortcut">
+                <span>Home</span>
+                <kbd>⌘1</kbd>
+              </div>
+              <div class="guide-shortcut">
+                <span>Settings</span>
+                <kbd>⌘,</kbd>
+              </div>
+            </div>
+
+            <h3>Updates</h3>
+            <p>
+              Clipper checks for updates every 24 hours. To check manually, choose
+              <strong>Clipper → Check for Updates…</strong> from the menu bar.
+            </p>
+
+            <div class="guide-complete">
+              <h3>Ready to capture your next meeting?</h3>
+              <p>Download Clipper and start building your private work memory.</p>
+              <a href="#download-app" class="btn btn-primary js-download">Download for Mac</a>
+            </div>
+          </section>
+
+          <section class="guide-section" id="troubleshooting">
+            <h2>Troubleshooting</h2>
+            <div class="guide-troubleshoot">
+              <details>
+                <summary>No system audio from Zoom, Meet, or Teams</summary>
+                <div class="guide-troubleshoot-body">
+                  <p>
+                    Confirm Screen Recording is enabled for Clipper in
+                    <strong>System Settings → Privacy &amp; Security → Screen Recording</strong>.
+                  </p>
+                  <p>
+                    Then open <strong>Settings → Recording</strong> in Clipper and ensure
+                    <strong>Record system audio</strong> is turned on.
+                  </p>
+                </div>
+              </details>
+              <details>
+                <summary>No meeting detection alerts</summary>
+                <div class="guide-troubleshoot-body">
+                  <p>
+                    Check that Notifications are allowed for Clipper, the master
+                    <strong>Meeting Detection</strong> toggle is on, and the app you're using
+                    (Zoom, Meet, Teams) is enabled under <strong>Settings → Detection</strong>.
+                  </p>
+                </div>
+              </details>
+              <details>
+                <summary>Models not ready or summarization fails</summary>
+                <div class="guide-troubleshoot-body">
+                  <p>
+                    Open <strong>Settings → Models</strong> and download or load the required
+                    models. You need an internet connection for the initial download.
+                  </p>
+                </div>
+              </details>
+              <details>
+                <summary>Live transcript not appearing</summary>
+                <div class="guide-troubleshoot-body">
+                  <p>
+                    Allow Speech Recognition when macOS prompts on first recording. If you skipped
+                    model download, ensure the live transcription model is loaded under
+                    <strong>Settings → Models</strong>.
+                  </p>
+                </div>
+              </details>
+              <details>
+                <summary>Review or reset permissions</summary>
+                <div class="guide-troubleshoot-body">
+                  <p>
+                    See the <a href="#permissions">Permissions</a> section for System Settings
+                    paths. You can also manage recording and detection preferences inside Clipper's
+                    Settings.
+                  </p>
+                </div>
+              </details>
+              <details>
+                <summary>Still stuck?</summary>
+                <div class="guide-troubleshoot-body">
+                  <p>
+                    Email us at <a href="mailto:hi@offlyn.ai">hi@offlyn.ai</a> and we'll
+                    help you get set up.
+                  </p>
+                </div>
+              </details>
+            </div>
+          </section>
+        </article>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-top">
+        <div class="container footer-top-inner">
+          <a href="/" class="logo logo-footer">
+            <img src="assets/clipper-logo.png" alt="Clipper" width="40" height="40" />
+            <span class="logo-text">
+              <span class="logo-name">Clipper</span>
+              <span class="logo-byline">by Offlyn.ai</span>
+            </span>
+          </a>
+          <p>The offline AI notepad for macOS.</p>
+        </div>
+      </div>
+      <div class="container footer-grid">
+        <div class="footer-col">
+          <h4>Privacy</h4>
+          <p>All transcription and AI runs on your Mac. Your data is never used to train models.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Product</h4>
+          <a href="/#how-it-works">How it works</a><br />
+          <a href="/#features">Features</a><br />
+          <a href="/#compare">Compare</a><br />
+          <a href="/#privacy">Privacy</a><br />
+          <a href="/setup.html">Setup guide</a>
+        </div>
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <a href="mailto:hi@offlyn.ai">hi@offlyn.ai</a>
+        </div>
+      </div>
+      <div class="container footer-bottom">
+        © 2026 Offlyn.ai · Offline by default · Mac only
+      </div>
+    </footer>
+
+    <div class="download-modal" id="download-modal" hidden aria-hidden="true">
+      <div class="download-modal-backdrop" data-close-modal></div>
+      <div
+        class="download-modal-dialog"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="download-modal-title"
+      >
+        <button type="button" class="download-modal-close" data-close-modal aria-label="Close">
+          ×
+        </button>
+        <div id="download-signup-state">
+          <p class="download-modal-eyebrow">Free beta · macOS 26+</p>
+          <h2 id="download-modal-title" class="download-modal-title">Get Clipper for Mac</h2>
+          <p class="download-modal-lead">
+            Enter your email to download and get occasional product updates. No spam — unsubscribe
+            anytime.
+          </p>
+          <form
+            class="download-modal-form"
+            id="download-signup-form"
+            action="https://formspree.io/f/xlgvppoa"
+            method="POST"
+            novalidate
+          >
+            <label class="sr-only" for="signup-email">Email address</label>
+            <input
+              type="email"
+              id="signup-email"
+              name="email"
+              class="download-modal-input"
+              placeholder="you@company.com"
+              autocomplete="email"
+              required
+            />
+            <div
+              id="download-recaptcha-widget"
+              class="download-modal-recaptcha-widget"
+              hidden
+              aria-hidden="true"
+            ></div>
+            <p class="download-modal-error" id="download-signup-error" hidden></p>
+            <button type="submit" class="btn btn-primary download-modal-submit" id="download-signup-submit">
+              Continue
+            </button>
+          </form>
+          <p class="download-modal-fine">
+            Your email is used for Clipper updates only. Audio and notes stay on your Mac.
+          </p>
+          <p class="download-modal-fine download-modal-recaptcha" id="download-recaptcha-notice" hidden>
+            This site is protected by reCAPTCHA and the Google
+            <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Privacy Policy</a>
+            and
+            <a href="https://policies.google.com/terms" target="_blank" rel="noopener">Terms of Service</a>
+            apply.
+          </p>
+        </div>
+        <div id="download-verify-state" hidden>
+          <p class="download-modal-eyebrow">Verify email</p>
+          <h2 class="download-modal-title">Check your inbox</h2>
+          <p class="download-modal-lead">
+            We sent a 6-digit code to
+            <strong class="download-modal-email" id="verify-email-display"></strong>.
+            Enter it below to confirm your email and download Clipper.
+          </p>
+          <form class="download-modal-form" id="download-verify-form" novalidate>
+            <label class="sr-only" for="signup-verify-code">Verification code</label>
+            <input
+              type="text"
+              id="signup-verify-code"
+              name="code"
+              class="download-modal-input download-modal-code"
+              placeholder="000000"
+              inputmode="numeric"
+              autocomplete="one-time-code"
+              maxlength="6"
+              pattern="[0-9]{6}"
+              required
+            />
+            <p class="download-modal-error" id="download-verify-error" hidden></p>
+            <button type="submit" class="btn btn-primary download-modal-submit" id="download-verify-submit">
+              Verify and download
+            </button>
+          </form>
+          <div class="download-modal-verify-actions">
+            <button type="button" class="download-modal-link" id="download-verify-resend">
+              Resend code
+            </button>
+            <button type="button" class="download-modal-link" id="download-verify-back">
+              Use a different email
+            </button>
+          </div>
+          <p class="download-modal-fine">Code expires in 10 minutes. Check spam if you do not see it.</p>
+        </div>
+        <div class="download-modal-success" id="download-success-state" hidden>
+          <p class="download-modal-eyebrow">High demand</p>
+          <h2 class="download-modal-title">You're on the waitlist</h2>
+          <p class="download-modal-success-text" id="download-signup-success-text"></p>
+          <a href="#" class="btn btn-secondary download-modal-releases" id="download-releases-link" hidden>
+            View releases
+          </a>
+          <button type="button" class="btn btn-primary" data-close-modal>Done</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="config.js"></script>
+    <script src="script.js"></script>
+    <script>
+      (function () {
+        const select = document.getElementById("guide-toc-select");
+        select?.addEventListener("change", function () {
+          const target = document.querySelector(this.value);
+          if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
+        });
+
+        const tocLinks = document.querySelectorAll(".guide-toc nav a");
+        const sections = Array.from(document.querySelectorAll(".guide-section[id]"));
+
+        if (!sections.length || !tocLinks.length) return;
+
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (!entry.isIntersecting) return;
+              const id = entry.target.getAttribute("id");
+              tocLinks.forEach((link) => {
+                link.classList.toggle("is-active", link.getAttribute("href") === "#" + id);
+              });
+              if (select) {
+                select.value = "#" + id;
+              }
+            });
+          },
+          { rootMargin: "-20% 0px -60% 0px", threshold: 0 }
+        );
+
+        sections.forEach((section) => observer.observe(section));
+      })();
+    </script>
+  </body>
+</html>
