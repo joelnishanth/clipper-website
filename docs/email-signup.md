@@ -25,7 +25,7 @@ The marketing site captures email **when the user clicks any “Download for Mac
 
 ```javascript
 window.CLIPPER_SIGNUP = {
-  downloadUrl: "https://github.com/joelnishanth/clipper-website/releases/download/v1.3.0/Clipper-1.3.0.dmg",
+  downloadUrl: "https://github.com/joelnishanth/clipper-website/releases/download/v1.4.0/Clipper-1.4.0.dmg",
   formEndpoint: "https://formspree.io/f/YOUR_FORM_ID",
   verificationApi: "https://clipper-signup-api.your-account.workers.dev", // or null
   recaptchaSiteKey: "YOUR_RECAPTCHA_V3_SITE_KEY", // or null
