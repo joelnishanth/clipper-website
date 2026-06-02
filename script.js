@@ -12,7 +12,7 @@
 
   const signupConfig = window.CLIPPER_SIGNUP || {
     downloadUrl:
-      "https://github.com/joelnishanth/clipper-website/releases/download/v1.5.1/Clipper-1.5.1.dmg",
+      "https://github.com/joelnishanth/clipper-website/releases/download/v1.5.2/Clipper-1.5.2.dmg",
     formEndpoint: null,
     verificationApi: null,
     recaptchaSiteKey: null,
