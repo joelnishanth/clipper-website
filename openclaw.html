@@ -1,0 +1,417 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://use.typekit.net" crossorigin />
+    <link rel="icon" type="image/png" href="assets/clipper-logo.png" />
+    <link rel="stylesheet" href="fonts.css" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="guide.css" />
+    <title>OpenClaw Integration — Clipper</title>
+    <meta
+      name="description"
+      content="Connect OpenClaw to Clipper. Search your notes, get live meeting recaps, and use chat presets — all locally via MCP on your Mac. No cloud."
+    />
+    <link rel="canonical" href="https://clipper.offlyn.ai/openclaw.html" />
+  </head>
+  <body class="guide-page">
+    <header class="site-header">
+      <div class="container header-inner">
+        <a href="/" class="logo">
+          <img src="assets/clipper-logo.png" alt="Clipper" width="40" height="40" />
+          <span class="logo-text">
+            <span class="logo-name">Clipper</span>
+            <span class="logo-byline">by Offlyn.ai</span>
+          </span>
+        </a>
+        <nav class="nav-desktop">
+          <a href="/#how-it-works">How it works</a>
+          <a href="/#features">Features</a>
+          <a href="/#compare">Compare</a>
+          <a href="/#privacy">Privacy</a>
+          <a href="/setup.html">Setup guide</a>
+          <a href="/openclaw.html" class="active">OpenClaw</a>
+          <a href="#download-app" class="nav-cta js-download">Download for Mac</a>
+        </nav>
+        <button class="menu-toggle" aria-label="Open menu" type="button">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+      <nav class="nav-mobile container">
+        <a href="/#how-it-works">How it works</a>
+        <a href="/#features">Features</a>
+        <a href="/#compare">Compare</a>
+        <a href="/#privacy">Privacy</a>
+        <a href="/setup.html">Setup guide</a>
+        <a href="/openclaw.html">OpenClaw</a>
+        <a href="#download-app" class="js-download">Download for Mac</a>
+      </nav>
+    </header>
+
+    <main>
+      <header class="guide-hero">
+        <div class="container guide-hero-inner">
+          <p class="guide-eyebrow">Integration</p>
+          <h1>Clipper + OpenClaw</h1>
+          <p class="guide-lead">
+            Let your OpenClaw agent search your Clipper notes, recap live meetings, and suggest
+            follow-up actions — all locally on your Mac via MCP. No data leaves your machine.
+          </p>
+        </div>
+      </header>
+
+      <div class="container guide-layout">
+        <aside class="guide-toc" aria-label="On this page">
+          <p class="guide-toc-title">On this page</p>
+          <nav>
+            <ol>
+              <li><a href="#overview">Overview</a></li>
+              <li><a href="#what-you-get">What you get</a></li>
+              <li><a href="#requirements">Requirements</a></li>
+              <li><a href="#setup">Setup</a></li>
+              <li><a href="#tools">Available tools</a></li>
+              <li><a href="#live-meeting">Live meeting catch-up</a></li>
+              <li><a href="#permissions">Permissions &amp; privacy</a></li>
+              <li><a href="#troubleshooting">Troubleshooting</a></li>
+            </ol>
+          </nav>
+        </aside>
+
+        <div class="guide-toc-mobile">
+          <label for="toc-select">Jump to section</label>
+          <select id="toc-select" onchange="location.hash=this.value">
+            <option value="#overview">Overview</option>
+            <option value="#what-you-get">What you get</option>
+            <option value="#requirements">Requirements</option>
+            <option value="#setup">Setup</option>
+            <option value="#tools">Available tools</option>
+            <option value="#live-meeting">Live meeting catch-up</option>
+            <option value="#permissions">Permissions &amp; privacy</option>
+            <option value="#troubleshooting">Troubleshooting</option>
+          </select>
+        </div>
+
+        <article class="guide-article">
+          <!-- Overview -->
+          <section id="overview" class="guide-section">
+            <h2>Overview</h2>
+            <p>
+              Clipper exposes a local <strong>MCP server</strong> (Model Context Protocol) over a
+              Unix socket on your Mac. OpenClaw connects to it through the
+              <strong>offlyn-clipper</strong> skill — no internet required.
+            </p>
+            <p>
+              The integration gives your OpenClaw agent direct access to your Clipper notes and live
+              meeting context, with granular permission controls you manage in
+              <strong>Clipper &rarr; Settings &rarr; Integrations</strong>.
+            </p>
+            <div class="guide-callout guide-callout--tip">
+              <p class="guide-callout-title">Local only</p>
+              <p>
+                All communication happens over a Unix domain socket on your Mac. No API keys,
+                no cloud relay, no data leaves your machine.
+              </p>
+            </div>
+          </section>
+
+          <!-- What you get -->
+          <section id="what-you-get" class="guide-section">
+            <h2>What you get</h2>
+            <ul>
+              <li><strong>Search your notes</strong> — ask OpenClaw about past meetings, voice notes, prior thinking, or project context.</li>
+              <li><strong>Live meeting catch-up</strong> — while Clipper is recording, ask "catch me up" and get a recap of the current call.</li>
+              <li><strong>Chat suggestion presets</strong> — OpenClaw offers quick action chips (action items, follow-up emails, key decisions) matching your in-app experience.</li>
+              <li><strong>Full note context</strong> — drill into a specific note by ID for summary or full body.</li>
+              <li><strong>Health check</strong> — a ping tool confirms connectivity and live meeting status.</li>
+            </ul>
+          </section>
+
+          <!-- Requirements -->
+          <section id="requirements" class="guide-section">
+            <h2>Requirements</h2>
+            <div class="guide-requirements">
+              <h3>You need</h3>
+              <ul>
+                <li>macOS 14 (Sonoma) or later</li>
+                <li>Clipper installed and running</li>
+                <li>OpenClaw CLI installed (<code>openclaw</code> on PATH)</li>
+                <li>Node.js 18+ (for the MCP bridge)</li>
+              </ul>
+            </div>
+          </section>
+
+          <!-- Setup -->
+          <section id="setup" class="guide-section">
+            <h2>Setup</h2>
+            <p>
+              Setup runs entirely from OpenClaw. The <strong>offlyn-clipper</strong> skill handles
+              MCP registration, pairing, and verification.
+            </p>
+            <ol class="guide-steps">
+              <li>
+                <p><strong>Launch Clipper</strong> and leave it running.</p>
+              </li>
+              <li>
+                <p><strong>Install the skill</strong> (one time):</p>
+                <pre><code>openclaw skills install offlyn-clipper</code></pre>
+              </li>
+              <li>
+                <p><strong>Run setup</strong>:</p>
+                <pre><code>bash ~/.openclaw/skills/offlyn-clipper/scripts/setup.sh</code></pre>
+              </li>
+              <li>
+                <p>
+                  <strong>Approve pairing</strong> — when Clipper shows the "OpenClaw wants to
+                  connect" dialog, click <strong>Allow</strong>.
+                </p>
+              </li>
+              <li>
+                <p><strong>Start a new OpenClaw chat</strong> (<code>/new</code>) so the skill loads.</p>
+              </li>
+              <li>
+                <p><strong>Test it</strong>:</p>
+                <pre><code>openclaw agent --message "Search my Clipper notes for pricing"</code></pre>
+              </li>
+            </ol>
+            <div class="guide-callout guide-callout--warn">
+              <p class="guide-callout-title">Important: /new after setup</p>
+              <p>
+                OpenClaw snapshots MCP tools at session start. If you set up the skill in an existing
+                chat, tools won't appear. Always start a <strong>new</strong> chat after setup or
+                after running <code>openclaw gateway restart</code>.
+              </p>
+            </div>
+          </section>
+
+          <!-- Tools -->
+          <section id="tools" class="guide-section">
+            <h2>Available tools</h2>
+            <p>
+              Once connected, OpenClaw can call these MCP tools. You control which ones are enabled
+              in <strong>Clipper &rarr; Settings &rarr; Integrations &rarr; Shared with OpenClaw</strong>.
+            </p>
+            <div class="guide-table-wrap">
+              <table class="guide-table">
+                <thead>
+                  <tr>
+                    <th>Tool</th>
+                    <th>What it does</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>clipper_search_notes</td>
+                    <td>Search saved meetings, voice notes, and text notes. Returns summaries with citations.</td>
+                  </tr>
+                  <tr>
+                    <td>clipper_get_note_context</td>
+                    <td>Get details for one note by UUID — summary or full body (if permitted).</td>
+                  </tr>
+                  <tr>
+                    <td>clipper_catch_me_up</td>
+                    <td>Recap the live meeting Clipper is recording right now.</td>
+                  </tr>
+                  <tr>
+                    <td>clipper_list_chat_presets</td>
+                    <td>List quick-action presets (same chips as Clipper's in-app chat).</td>
+                  </tr>
+                  <tr>
+                    <td>clipper_ping</td>
+                    <td>Health check — confirms socket is reachable and reports live meeting status.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <!-- Live meeting -->
+          <section id="live-meeting" class="guide-section">
+            <h2>Live meeting catch-up</h2>
+            <p>
+              While Clipper is <strong>recording</strong>, you can ask OpenClaw to catch you up.
+              The agent calls <code>clipper_catch_me_up</code> and summarizes the transcript so far —
+              decisions, topics, action items, open questions.
+            </p>
+            <p><strong>Example prompts:</strong></p>
+            <ul>
+              <li>"Catch me up on my live meeting"</li>
+              <li>"What did I miss in the last 10 minutes?"</li>
+              <li>"Recap the current call"</li>
+            </ul>
+            <div class="guide-callout">
+              <p class="guide-callout-title">Not recording?</p>
+              <p>
+                If Clipper isn't actively recording, the tool returns <code>no_active_meeting</code>.
+                Start or resume a recording in Clipper, then ask again.
+              </p>
+            </div>
+          </section>
+
+          <!-- Permissions -->
+          <section id="permissions" class="guide-section">
+            <h2>Permissions &amp; privacy</h2>
+            <p>
+              Clipper uses a layered permission model. OpenClaw never gets more access than you
+              explicitly grant.
+            </p>
+
+            <h3>Scopes</h3>
+            <div class="guide-table-wrap">
+              <table class="guide-table">
+                <thead>
+                  <tr>
+                    <th>Scope</th>
+                    <th>Grants access to</th>
+                    <th>Default</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>notes:search:limited</td>
+                    <td>Search summaries and snippets</td>
+                    <td>On</td>
+                  </tr>
+                  <tr>
+                    <td>notes:read:summary</td>
+                    <td>Per-note summary / snippet</td>
+                    <td>On</td>
+                  </tr>
+                  <tr>
+                    <td>notes:read:raw</td>
+                    <td>Full note body text</td>
+                    <td>Off (opt-in)</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <h3>Per-tool toggles</h3>
+            <p>
+              Each MCP tool can be individually disabled in
+              <strong>Settings &rarr; Integrations &rarr; Shared with OpenClaw</strong>. Disabled
+              tools return a <code>tool_disabled</code> error to the agent.
+            </p>
+
+            <h3>Security model</h3>
+            <ul>
+              <li>Unix socket with <code>0600</code> permissions — only your user can connect.</li>
+              <li>Ed25519 challenge-response pairing with cryptographic verification.</li>
+              <li>Session tokens expire after 15 minutes (auto-renewed).</li>
+              <li>Every request is logged in Clipper's audit trail (visible in Settings).</li>
+              <li>Revoke access instantly by toggling OpenClaw off in Integrations.</li>
+            </ul>
+          </section>
+
+          <!-- Troubleshooting -->
+          <section id="troubleshooting" class="guide-section">
+            <h2>Troubleshooting</h2>
+            <div class="guide-troubleshoot">
+              <details>
+                <summary>"bundle-mcp runtime disposed"</summary>
+                <div class="guide-troubleshoot-body">
+                  <p>
+                    This means your current OpenClaw chat session started before the Clipper MCP
+                    bridge was ready. Tools are frozen per-session.
+                  </p>
+                  <p><strong>Fix:</strong></p>
+                  <ol>
+                    <li>Run <code>openclaw gateway restart</code> in Terminal.</li>
+                    <li>Start a <strong>new</strong> OpenClaw chat (<code>/new</code>).</li>
+                  </ol>
+                  <p>
+                    There is no <code>mcp reload</code> command — you must start a fresh session.
+                  </p>
+                </div>
+              </details>
+
+              <details>
+                <summary>Tools missing after setup</summary>
+                <div class="guide-troubleshoot-body">
+                  <p>
+                    The skill wasn't loaded when the session started. Run
+                    <code>openclaw gateway restart</code> and open a <code>/new</code> chat.
+                  </p>
+                </div>
+              </details>
+
+              <details>
+                <summary>connect ECONNREFUSED</summary>
+                <div class="guide-troubleshoot-body">
+                  <p>
+                    Clipper isn't running or the socket doesn't exist yet. Launch Clipper, wait a
+                    few seconds, then retry. If the issue persists, re-run:
+                  </p>
+                  <pre><code>bash ~/.openclaw/skills/offlyn-clipper/scripts/setup.sh</code></pre>
+                </div>
+              </details>
+
+              <details>
+                <summary>Pairing denied</summary>
+                <div class="guide-troubleshoot-body">
+                  <p>
+                    You clicked <strong>Deny</strong> on Clipper's pairing dialog. Re-run:
+                  </p>
+                  <pre><code>node ~/.openclaw/skills/offlyn-clipper/mcp-bridge/pair.mjs</code></pre>
+                  <p>
+                    Switch to Clipper and click <strong>Allow</strong> when the dialog appears.
+                  </p>
+                </div>
+              </details>
+
+              <details>
+                <summary>permission_blocked</summary>
+                <div class="guide-troubleshoot-body">
+                  <p>
+                    The requested scope isn't granted. Open
+                    <strong>Clipper &rarr; Settings &rarr; Integrations</strong> and enable the
+                    relevant toggle (e.g. "Share full note bodies" for raw access).
+                  </p>
+                </div>
+              </details>
+
+              <details>
+                <summary>no_active_meeting</summary>
+                <div class="guide-troubleshoot-body">
+                  <p>
+                    <code>clipper_catch_me_up</code> requires an active recording. Start recording
+                    in Clipper (Quick Note or the meeting banner), then ask again.
+                  </p>
+                </div>
+              </details>
+
+              <details>
+                <summary>Updating the skill after an upgrade</summary>
+                <div class="guide-troubleshoot-body">
+                  <p>After pulling a new Clipper version:</p>
+                  <pre><code>openclaw skills update offlyn-clipper
+openclaw gateway restart</code></pre>
+                  <p>Then start a <code>/new</code> chat.</p>
+                </div>
+              </details>
+            </div>
+          </section>
+
+          <!-- Completion -->
+          <div class="guide-complete">
+            <h3>Ready to connect</h3>
+            <p>
+              Install the skill, approve pairing, and start asking OpenClaw about your notes
+              and live meetings — all without leaving your terminal.
+            </p>
+            <a href="/#download-app" class="btn btn-primary js-download">Download Clipper</a>
+          </div>
+        </article>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <p>&copy; 2026 Offlyn.ai &mdash; Built in Sydney</p>
+      </div>
+    </footer>
+
+    <script src="config.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
