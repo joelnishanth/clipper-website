@@ -16,7 +16,7 @@ Pushes to `main` deploy automatically to GitHub Pages via Actions.
 
 Live site: https://clipper.offlyn.ai
 
-Download: https://github.com/joelnishanth/clipper-website/releases/download/v1.5.2/Clipper-1.5.2.dmg
+Download: https://github.com/joelnishanth/clipper-website/releases/download/v1.6.0/Clipper-1.6.0.dmg
 
 Color palette: [docs/color-scheme.md](docs/color-scheme.md)
 
