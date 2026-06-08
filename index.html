@@ -19,23 +19,34 @@
     <meta name="title" content="Clipper — AI Meeting Notes, Processed Entirely on Your Mac" />
     <meta
       name="description"
-      content="Clipper is the AI notetaker that never joins your meetings. Local transcription, on-device summarization, and private search — all on your Mac. No cloud. No meeting bots. No data training."
+      content="Clipper is a free AI meeting notetaker for macOS that processes everything on-device. Local Whisper transcription, MLX summarization, and hybrid offline search — no cloud, no meeting bots, no data leaves your Mac. Built natively for Apple Silicon."
     />
-    <meta name="keywords" content="AI meeting notes, on-device transcription, local AI, privacy meeting recorder, Mac meeting notes, offline AI, no meeting bot, Whisper local, MLX, Apple Silicon AI, private meeting assistant" />
+    <meta name="keywords" content="AI meeting notes, on-device transcription, local AI notetaker, privacy meeting recorder, Mac meeting notes, offline AI, no meeting bot, Whisper local transcription, MLX inference, Apple Silicon AI, private meeting assistant, macOS productivity, on-device summarization, local speech to text, meeting transcription app, AI notes without cloud, private AI assistant Mac, offline meeting recorder, GRDB SQLite search, Zoom meeting notes, Google Meet notes, Teams meeting notes, free meeting notetaker, Granola alternative, Otter alternative, Fireflies alternative, on-device LLM, consent-first recording, no data training, local vector search" />
     <meta name="author" content="Offlyn AI" />
-    <meta name="robots" content="index, follow" />
+    <meta name="publisher" content="Offlyn AI" />
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
     <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+    <meta name="bingbot" content="index, follow" />
     <link rel="canonical" href="https://clipper.offlyn.ai/" />
+    <meta name="subject" content="AI Meeting Notes Software" />
+    <meta name="classification" content="Productivity, AI, Meeting Notes, Privacy" />
+    <meta name="category" content="Productivity" />
+    <meta name="coverage" content="Worldwide" />
+    <meta name="distribution" content="Global" />
+    <meta name="rating" content="General" />
+    <meta name="revised" content="2026-06-08" />
+    <meta name="date" content="2026-06-08" />
 
     <!-- Open Graph / Facebook / LinkedIn -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://clipper.offlyn.ai/" />
     <meta property="og:title" content="Clipper — AI Meeting Notes, Processed Entirely on Your Mac" />
-    <meta property="og:description" content="The AI notetaker that never joins your meetings. Local transcription, on-device summarization, and private search — no cloud, no meeting bots, no data training." />
+    <meta property="og:description" content="Free AI notetaker for macOS. Local Whisper transcription, on-device MLX summarization, and offline hybrid search. No cloud, no meeting bots, no data leaves your Mac." />
     <meta property="og:image" content="https://clipper.offlyn.ai/assets/og-image.png" />
     <meta property="og:image:width" content="2400" />
     <meta property="og:image:height" content="1260" />
-    <meta property="og:image:alt" content="Clipper — AI meeting notes processed on-device" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:alt" content="Clipper app showing AI-generated meeting notes with overview, action items, and timestamped sections — all processed locally on Mac" />
     <meta property="og:site_name" content="Clipper by Offlyn AI" />
     <meta property="og:locale" content="en_US" />
 
@@ -43,9 +54,11 @@
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:url" content="https://clipper.offlyn.ai/" />
     <meta name="twitter:title" content="Clipper — AI Meeting Notes, Processed Entirely on Your Mac" />
-    <meta name="twitter:description" content="The AI notetaker that never joins your meetings. Local transcription, on-device summarization, and private search — no cloud, no meeting bots." />
+    <meta name="twitter:description" content="Free AI notetaker for macOS. Local Whisper transcription, on-device MLX summarization, and offline hybrid search. No cloud, no meeting bots." />
     <meta name="twitter:image" content="https://clipper.offlyn.ai/assets/og-image.png" />
-    <meta name="twitter:image:alt" content="Clipper — AI meeting notes processed on-device" />
+    <meta name="twitter:image:alt" content="Clipper app showing AI-generated meeting notes processed locally on Mac" />
+    <meta name="twitter:creator" content="@offlynai" />
+    <meta name="twitter:site" content="@offlynai" />
 
     <!-- Apple / Mobile -->
     <meta name="apple-mobile-web-app-title" content="Clipper" />
@@ -57,34 +70,128 @@
     <link rel="icon" type="image/png" sizes="32x32" href="assets/clipper-logo.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="assets/clipper-logo.png" />
 
-    <!-- Structured Data (JSON-LD) -->
+    <!-- Structured Data: SoftwareApplication (JSON-LD) -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "SoftwareApplication",
       "name": "Clipper",
-      "description": "AI meeting notes processed entirely on your Mac. Local transcription, on-device summarization, and private search with no cloud dependency.",
+      "alternateName": ["Clipper by Offlyn AI", "Offlyn Clipper", "Clipper AI Meeting Notes"],
+      "description": "Clipper is a free AI meeting notetaker for macOS that processes everything on-device. It uses local Whisper transcription and MLX summarization with no cloud dependency — audio and notes never leave your Mac.",
       "url": "https://clipper.offlyn.ai/",
       "applicationCategory": "ProductivityApplication",
-      "operatingSystem": "macOS 14.0+",
+      "operatingSystem": "macOS 14.0 Sonoma or later",
+      "processorRequirements": "Apple Silicon (M1 or later) recommended",
       "offers": {
         "@type": "Offer",
         "price": "0",
-        "priceCurrency": "USD"
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock"
       },
       "author": {
         "@type": "Organization",
         "name": "Offlyn AI",
-        "url": "https://offlyn.ai"
+        "url": "https://offlyn.ai",
+        "logo": "https://clipper.offlyn.ai/assets/clipper-logo.png",
+        "sameAs": ["https://github.com/offlyn-ai"]
       },
+      "datePublished": "2026-05-01",
+      "dateModified": "2026-06-08",
+      "softwareVersion": "1.0-beta",
+      "downloadUrl": "https://clipper.offlyn.ai/",
+      "screenshot": "https://clipper.offlyn.ai/assets/og-image.png",
       "softwareRequirements": "macOS 14.0 Sonoma or later, Apple Silicon recommended",
       "featureList": [
-        "On-device AI transcription with Whisper",
-        "Local meeting summarization",
-        "No meeting bot required",
-        "Private on-device search",
-        "PDF and YouTube import",
-        "Works offline"
+        "On-device AI transcription with Whisper via MLX",
+        "Local meeting summarization using on-device language models",
+        "No meeting bot — captures system audio locally",
+        "Consent-first meeting detection with floating opt-in banner",
+        "Hybrid offline search with FTS5 full-text and vector embeddings",
+        "PDF and YouTube URL import for local AI processing",
+        "Works fully offline with no internet required",
+        "100% private — audio and notes never leave your Mac",
+        "Native macOS app built with Swift and SwiftUI",
+        "Free beta with no per-seat pricing"
+      ],
+      "keywords": "AI meeting notes, local transcription, on-device AI, macOS, Apple Silicon, Whisper, MLX, private meeting assistant, offline AI, no cloud"
+    }
+    </script>
+
+    <!-- Structured Data: Organization (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Offlyn AI",
+      "url": "https://offlyn.ai",
+      "logo": "https://clipper.offlyn.ai/assets/clipper-logo.png",
+      "sameAs": ["https://github.com/offlyn-ai"],
+      "description": "Offlyn AI builds privacy-first, on-device AI tools that process data locally without cloud dependencies."
+    }
+    </script>
+
+    <!-- Structured Data: FAQPage (JSON-LD) — helps AI assistants answer common questions -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is Clipper?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Clipper is a free AI meeting notetaker for macOS that processes everything entirely on your Mac. It uses local Whisper transcription and on-device MLX summarization — no cloud servers, no meeting bots, and no data ever leaves your computer."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does Clipper send my meeting data to the cloud?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Clipper processes all audio, transcription, and summarization 100% on-device using Apple Silicon. Your meeting audio and notes are stored locally in ~/Library/Application Support/ai.offlyn.clipper/ and are never uploaded to any server."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does Clipper join my meeting as a bot?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Clipper never joins your call as a participant. It captures system audio locally on your Mac when you explicitly opt in via a consent banner. Other meeting participants are never aware that Clipper is running."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What meetings does Clipper work with?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Clipper works with Zoom, Google Meet, Microsoft Teams, and any other app that produces system audio on macOS. It detects active meetings and shows a floating consent banner to opt in."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How is Clipper different from Otter.ai, Granola, or Fireflies?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Unlike Otter.ai, Granola, and Fireflies, Clipper processes everything locally on your Mac. There is no cloud upload, no per-seat SaaS subscription, no data retention on third-party servers, and no meeting bot that joins your call. It is a one-time download that works offline."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is Clipper free?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Clipper is currently available as a free beta for macOS 14+ (Sonoma) on Apple Silicon Macs."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What AI models does Clipper use?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Clipper uses OpenAI Whisper (running locally via MLX) for transcription and a local language model (also via MLX on Apple Silicon) for summarization. No API calls are made to OpenAI, Anthropic, or any external AI service."
+          }
+        }
       ]
     }
     </script>

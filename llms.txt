@@ -1,0 +1,41 @@
+# Clipper by Offlyn AI
+
+> Clipper is a free, privacy-first AI meeting notetaker for macOS. It runs entirely on-device using Apple Silicon — local Whisper transcription, on-device MLX summarization, and offline hybrid search. No cloud servers, no meeting bots, no data leaves your Mac.
+
+## Main Pages
+
+- [Homepage](https://clipper.offlyn.ai/): Product overview, feature highlights, and download link for the free macOS beta.
+- [Setup Guide](https://clipper.offlyn.ai/setup.html): Step-by-step installation and configuration guide for Clipper on macOS.
+
+## Key Facts
+
+- **Category**: Productivity / AI Meeting Notes
+- **Platform**: macOS 14.0+ (Sonoma), Apple Silicon recommended
+- **Price**: Free beta
+- **Privacy model**: 100% on-device processing. Zero cloud dependency. Audio never leaves the Mac.
+- **Transcription**: Local Whisper model via MLX framework on Apple Silicon
+- **Summarization**: On-device language model (MLX). No API calls to OpenAI, Anthropic, or any external service.
+- **Search**: Hybrid offline search combining FTS5 full-text and local vector embeddings
+- **Meeting detection**: Consent-first — shows a floating banner when Zoom, Google Meet, or Teams is detected; user must opt in
+- **Data residency**: All data stored locally in ~/Library/Application Support/ai.offlyn.clipper/
+- **Import**: Supports PDF and YouTube URL import for local AI processing
+- **No meeting bot**: Clipper never joins your call as a participant — it captures system audio locally
+
+## Comparisons
+
+- **vs. Granola, Otter.ai, Fireflies**: Clipper processes everything locally — no cloud upload, no per-seat SaaS cost, no data retention on third-party servers
+- **vs. Ollama**: Clipper provides a full meeting workflow (detection, transcription, summarization, search) not just model hosting
+- **vs. NotebookLM**: Clipper handles large meetings and PDFs locally without upload size limits or Google account dependency
+
+## Technical Stack
+
+- Swift / SwiftUI native macOS app
+- MLX framework for on-device inference (Apple Silicon)
+- Whisper for local transcription
+- GRDB + SQLite with FTS5 for hybrid search
+- No Electron, no web wrapper
+
+## Contact
+
+- Website: https://clipper.offlyn.ai
+- Organization: Offlyn AI (https://offlyn.ai)
