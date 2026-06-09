@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://use.typekit.net" crossorigin />
+    <link rel="icon" type="image/png" href="assets/clipper-logo.png" />
+    <link rel="stylesheet" href="fonts.css" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="guide.css" />
+    <title>Privacy Policy — Clipper</title>
+    <meta
+      name="description"
+      content="Clipper privacy policy. Learn how your data is stored locally on your Mac and what network connections the app makes."
+    />
+    <link rel="canonical" href="https://clipper.offlyn.ai/privacy.html" />
+  </head>
+  <body class="guide-page">
+    <header class="site-header">
+      <div class="container header-inner">
+        <a href="/" class="logo">
+          <img src="assets/clipper-logo.png" alt="Clipper" width="40" height="40" />
+          <span class="logo-text">
+            <span class="logo-name">Clipper</span>
+            <span class="logo-byline">by Offlyn.ai</span>
+          </span>
+        </a>
+        <nav class="nav-desktop">
+          <a href="/#how-it-works">How it works</a>
+          <a href="/#features">Features</a>
+          <a href="/#compare">Compare</a>
+          <a href="/#privacy">Privacy</a>
+          <a href="/setup.html">Setup guide</a>
+          <a href="/support.html">Support</a>
+          <a href="/openclaw.html">OpenClaw</a>
+          <a href="#download-app" class="nav-cta js-download">Download for Mac</a>
+        </nav>
+        <button class="menu-toggle" aria-label="Open menu" type="button">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+      <nav class="nav-mobile container">
+        <a href="/#how-it-works">How it works</a>
+        <a href="/#features">Features</a>
+        <a href="/#compare">Compare</a>
+        <a href="/#privacy">Privacy</a>
+        <a href="/setup.html">Setup guide</a>
+        <a href="/support.html">Support</a>
+        <a href="/openclaw.html">OpenClaw</a>
+        <a href="#download-app" class="js-download">Download for Mac</a>
+      </nav>
+    </header>
+
+    <main>
+      <header class="guide-hero">
+        <div class="container guide-hero-inner">
+          <p class="guide-eyebrow">Legal</p>
+          <h1>Privacy Policy</h1>
+          <p class="guide-lead">
+            Clipper is built for privacy. Your recordings, notes, and transcripts stay on your Mac.
+            This policy explains what data Clipper handles and how.
+          </p>
+          <p class="guide-lead" style="font-size: 0.9375rem; margin-top: 0.5rem">
+            Last updated: June 9, 2026
+          </p>
+        </div>
+      </header>
+
+      <div class="container">
+        <article class="guide-article">
+          <section class="guide-section" id="overview">
+            <h2>Overview</h2>
+            <p>
+              Clipper is a macOS application developed by Offlyn AI ("we", "us"). This privacy
+              policy describes how Clipper handles information when you use the app.
+            </p>
+            <p>
+              <strong>Clipper does not require an account.</strong> We do not collect, store, or
+              process your personal content on our servers. All core functionality — recording,
+              transcription, summarization, and search — runs on your Mac.
+            </p>
+          </section>
+
+          <section class="guide-section" id="local-data">
+            <h2>Data stored locally</h2>
+            <p>Clipper stores the following data on your Mac only:</p>
+            <ul>
+              <li>Audio recordings from meetings and voice notes</li>
+              <li>Transcripts and summaries generated from your recordings</li>
+              <li>Notes, attachments, and imported web content</li>
+              <li>Calendar event metadata (if you enable calendar integration)</li>
+              <li>App preferences and settings</li>
+              <li>On-device AI models downloaded for transcription and summarization</li>
+            </ul>
+            <p>
+              Data is stored in your Mac's Application Support directory. You can delete all Clipper
+              data by removing the app and its associated files.
+            </p>
+          </section>
+
+          <section class="guide-section" id="network">
+            <h2>Network connections</h2>
+            <p>
+              Clipper is primarily offline, but makes limited network connections for specific
+              features:
+            </p>
+            <ul>
+              <li>
+                <strong>AI model downloads</strong> — when you download on-device models from
+                Settings, Clipper fetches model files from Hugging Face. No personal data is sent.
+              </li>
+              <li>
+                <strong>URL import</strong> — when you import a web page, Clipper fetches the page
+                content you specify. Imported content is stored locally.
+              </li>
+              <li>
+                <strong>Bug reports</strong> — if you choose to send a bug report via email, you
+                control what information is included.
+              </li>
+            </ul>
+            <p>Clipper does not use analytics, telemetry, or tracking SDKs.</p>
+          </section>
+
+          <section class="guide-section" id="permissions">
+            <h2>macOS permissions</h2>
+            <p>Clipper requests the following macOS permissions, used only for their stated purpose:</p>
+            <ul>
+              <li><strong>Microphone</strong> — record audio during meetings and voice notes</li>
+              <li>
+                <strong>Screen Recording</strong> — capture system audio from meeting apps (audio
+                only, no screen video)
+              </li>
+              <li><strong>Speech Recognition</strong> — on-device transcription</li>
+              <li>
+                <strong>Calendar</strong> — display upcoming events and improve meeting detection
+                (optional)
+              </li>
+              <li>
+                <strong>Apple Events</strong> — detect active meeting tabs in supported browsers
+                (optional)
+              </li>
+              <li><strong>Notifications</strong> — meeting detection alerts (optional)</li>
+            </ul>
+            <p>You can revoke any permission at any time in System Settings.</p>
+          </section>
+
+          <section class="guide-section" id="openclaw">
+            <h2>OpenClaw integration</h2>
+            <p>
+              Clipper offers optional integration with OpenClaw, a local AI agent. When paired,
+              Clipper shares only the note or meeting content you explicitly request through the
+              integration. This communication happens locally via a Unix socket on your Mac.
+            </p>
+            <p>
+              OpenClaw is a separate application with its own privacy practices. We recommend
+              reviewing OpenClaw's documentation before enabling the integration.
+            </p>
+          </section>
+
+          <section class="guide-section" id="no-collection">
+            <h2>What we do not do</h2>
+            <ul>
+              <li>We do not upload your recordings, transcripts, or notes to any server</li>
+              <li>We do not use your data to train AI models</li>
+              <li>We do not sell or share your personal information</li>
+              <li>We do not require an account or sign-in</li>
+              <li>We do not use third-party analytics or advertising SDKs</li>
+            </ul>
+          </section>
+
+          <section class="guide-section" id="children">
+            <h2>Children's privacy</h2>
+            <p>
+              Clipper is not directed at children under 13. We do not knowingly collect information
+              from children.
+            </p>
+          </section>
+
+          <section class="guide-section" id="changes">
+            <h2>Changes to this policy</h2>
+            <p>
+              We may update this privacy policy from time to time. Changes will be posted on this
+              page with an updated date.
+            </p>
+          </section>
+
+          <section class="guide-section" id="contact">
+            <h2>Contact</h2>
+            <p>
+              Questions about this privacy policy? Email
+              <a href="mailto:hi@offlyn.ai">hi@offlyn.ai</a>.
+            </p>
+          </section>
+        </article>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-top">
+        <div class="container footer-top-inner">
+          <a href="/" class="logo logo-footer">
+            <img src="assets/clipper-logo.png" alt="Clipper" width="40" height="40" />
+            <span class="logo-text">
+              <span class="logo-name">Clipper</span>
+              <span class="logo-byline">by Offlyn.ai</span>
+            </span>
+          </a>
+          <p>The offline AI notepad for macOS.</p>
+        </div>
+      </div>
+      <div class="container footer-grid">
+        <div class="footer-col">
+          <h4>Privacy</h4>
+          <p>All transcription and AI runs on your Mac. Your data is never used to train models.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Product</h4>
+          <a href="/#how-it-works">How it works</a><br />
+          <a href="/#features">Features</a><br />
+          <a href="/#compare">Compare</a><br />
+          <a href="/privacy.html">Privacy policy</a><br />
+          <a href="/setup.html">Setup guide</a><br />
+          <a href="/support.html">Support</a>
+        </div>
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <a href="mailto:hi@offlyn.ai">hi@offlyn.ai</a>
+        </div>
+      </div>
+      <div class="container footer-bottom">
+        © 2026 Offlyn.ai · Offline by default · Mac only
+      </div>
+    </footer>
+
+    <script src="config.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>

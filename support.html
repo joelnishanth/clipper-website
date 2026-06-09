@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://use.typekit.net" crossorigin />
+    <link rel="icon" type="image/png" href="assets/clipper-logo.png" />
+    <link rel="stylesheet" href="fonts.css" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="guide.css" />
+    <title>Support — Clipper</title>
+    <meta
+      name="description"
+      content="Get help with Clipper for macOS. Contact support, troubleshooting for permissions, recording, and privacy."
+    />
+    <link rel="canonical" href="https://clipper.offlyn.ai/support.html" />
+  </head>
+  <body class="guide-page">
+    <header class="site-header">
+      <div class="container header-inner">
+        <a href="/" class="logo">
+          <img src="assets/clipper-logo.png" alt="Clipper" width="40" height="40" />
+          <span class="logo-text">
+            <span class="logo-name">Clipper</span>
+            <span class="logo-byline">by Offlyn.ai</span>
+          </span>
+        </a>
+        <nav class="nav-desktop">
+          <a href="/#how-it-works">How it works</a>
+          <a href="/#features">Features</a>
+          <a href="/#compare">Compare</a>
+          <a href="/#privacy">Privacy</a>
+          <a href="/setup.html">Setup guide</a>
+          <a href="/support.html" class="active">Support</a>
+          <a href="/openclaw.html">OpenClaw</a>
+          <a href="#download-app" class="nav-cta js-download">Download for Mac</a>
+        </nav>
+        <button class="menu-toggle" aria-label="Open menu" type="button">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+      <nav class="nav-mobile container">
+        <a href="/#how-it-works">How it works</a>
+        <a href="/#features">Features</a>
+        <a href="/#compare">Compare</a>
+        <a href="/#privacy">Privacy</a>
+        <a href="/setup.html">Setup guide</a>
+        <a href="/support.html">Support</a>
+        <a href="/openclaw.html">OpenClaw</a>
+        <a href="#download-app" class="js-download">Download for Mac</a>
+      </nav>
+    </header>
+
+    <main>
+      <header class="guide-hero">
+        <div class="container guide-hero-inner">
+          <p class="guide-eyebrow">Help</p>
+          <h1>Support</h1>
+          <p class="guide-lead">
+            Need help with Clipper? We're here. Email us and we'll get back to you as soon as we can.
+          </p>
+        </div>
+      </header>
+
+      <div class="container">
+        <article class="guide-article">
+          <section class="guide-section" id="contact">
+            <h2>Contact us</h2>
+            <p>
+              For product support, bug reports, or general questions about Clipper, email
+              <a href="mailto:hi@offlyn.ai">hi@offlyn.ai</a>.
+            </p>
+            <p>
+              Please include your macOS version, Clipper version (from Settings → About), and a
+              short description of the issue. Screenshots are helpful when relevant.
+            </p>
+          </section>
+
+          <section class="guide-section" id="permissions">
+            <h2>Permissions</h2>
+            <p>Clipper needs a few macOS permissions to work properly:</p>
+            <ul>
+              <li>
+                <strong>Microphone</strong> — records your voice during meetings and voice notes.
+                You can revoke this anytime in System Settings → Privacy &amp; Security → Microphone.
+              </li>
+              <li>
+                <strong>Screen Recording</strong> — captures system audio from meeting apps (audio
+                only, no screen video). Grant in System Settings → Privacy &amp; Security → Screen
+                &amp; System Audio Recording.
+              </li>
+              <li>
+                <strong>Notifications</strong> — optional alerts when Clipper detects a meeting.
+              </li>
+              <li>
+                <strong>Calendar</strong> — optional, for upcoming events and meeting detection.
+                Enable in Clipper Settings → Connectors.
+              </li>
+            </ul>
+            <p>
+              See the <a href="/setup.html#permissions">setup guide</a> for step-by-step
+              instructions.
+            </p>
+          </section>
+
+          <section class="guide-section" id="recording">
+            <h2>Recording issues</h2>
+            <ul>
+              <li>
+                <strong>No audio captured</strong> — check that Microphone and Screen Recording
+                permissions are granted. Restart Clipper after granting permissions.
+              </li>
+              <li>
+                <strong>Meeting not detected</strong> — ensure meeting detection is enabled in
+                Settings → Notifications. Calendar integration can improve detection accuracy.
+              </li>
+              <li>
+                <strong>Transcription slow or stuck</strong> — on-device models require Apple
+                Silicon. Ensure AI models are downloaded in Settings → Models.
+              </li>
+            </ul>
+          </section>
+
+          <section class="guide-section" id="privacy">
+            <h2>Data &amp; privacy</h2>
+            <p>
+              Clipper stores all recordings, transcripts, and notes locally on your Mac. AI
+              processing runs on-device — your personal content is not uploaded to any server.
+            </p>
+            <p>
+              Read our full <a href="/privacy.html">privacy policy</a> for details on data
+              handling, network usage, and optional integrations.
+            </p>
+          </section>
+
+          <section class="guide-section" id="general">
+            <h2>General</h2>
+            <ul>
+              <li>
+                <strong>System requirements</strong> — macOS 26.0+ on Apple Silicon. See the
+                <a href="/setup.html#requirements">setup guide</a>.
+              </li>
+              <li>
+                <strong>First-time setup</strong> — follow the
+                <a href="/setup.html">setup guide</a> to install models and grant permissions.
+              </li>
+              <li>
+                <strong>OpenClaw integration</strong> — optional local agent integration. See
+                <a href="/openclaw.html">OpenClaw docs</a>.
+              </li>
+            </ul>
+          </section>
+        </article>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-top">
+        <div class="container footer-top-inner">
+          <a href="/" class="logo logo-footer">
+            <img src="assets/clipper-logo.png" alt="Clipper" width="40" height="40" />
+            <span class="logo-text">
+              <span class="logo-name">Clipper</span>
+              <span class="logo-byline">by Offlyn.ai</span>
+            </span>
+          </a>
+          <p>The offline AI notepad for macOS.</p>
+        </div>
+      </div>
+      <div class="container footer-grid">
+        <div class="footer-col">
+          <h4>Privacy</h4>
+          <p>All transcription and AI runs on your Mac. Your data is never used to train models.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Product</h4>
+          <a href="/#how-it-works">How it works</a><br />
+          <a href="/#features">Features</a><br />
+          <a href="/#compare">Compare</a><br />
+          <a href="/privacy.html">Privacy policy</a><br />
+          <a href="/setup.html">Setup guide</a><br />
+          <a href="/support.html">Support</a>
+        </div>
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <a href="mailto:hi@offlyn.ai">hi@offlyn.ai</a>
+        </div>
+      </div>
+      <div class="container footer-bottom">
+        © 2026 Offlyn.ai · Offline by default · Mac only
+      </div>
+    </footer>
+
+    <script src="config.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
