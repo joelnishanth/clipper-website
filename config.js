@@ -2,7 +2,7 @@
 window.CLIPPER_SIGNUP = {
   /** GitHub release DMG — opened after successful signup */
   downloadUrl:
-    "https://github.com/joelnishanth/clipper-website/releases/download/v1.9.0/Clipper-1.9.0.dmg",
+    "https://github.com/joelnishanth/clipper-website/releases/download/v1.10.0/Clipper-1.10.0.dmg",
 
   /**
    * Formspree form URL (https://formspree.io/f/xxxxxxxx).
